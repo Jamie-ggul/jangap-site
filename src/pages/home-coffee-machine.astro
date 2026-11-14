@@ -1,0 +1,218 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교" description="하루 잔수, 메뉴, 예산만 넣으면 캡슐·전자동·반자동·핸드드립 중 우리 집에 맞는 커피머신과 3년 총비용, 카페 대비 회수 기간을 알려드려요." path="/home-coffee-machine/">
+
+  <p class="disclose">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.</p>
+
+  <h1>가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교</h1>
+  <p class="lead">커피머신 추천, 가격만 보면 헷갈려요. 하루 몇 잔, 무슨 메뉴를 마시는지 넣으면 머신값과 1잔 값을 합친 3년 총비용으로 캡슐·전자동·반자동·핸드드립을 비교해드려요.</p>
+
+  <section aria-label="마시는 습관 입력">
+    <p class="sentence">
+      하루 <input class="fill" id="cups" type="number" min="0.5" step="0.5" value="2" inputmode="decimal" aria-label="하루 잔수">잔,
+      주로 <span class="seg" role="group" aria-label="주로 마시는 메뉴"><button type="button" id="mAme" aria-pressed="true">아메리카노</button><button type="button" id="mLat" aria-pressed="false">라떼</button></span>를 마셔요.
+      머신 예산은 <input class="fill" id="budget" type="number" min="1" step="5" value="40" inputmode="numeric" aria-label="머신 예산(만 원)">만 원,
+      <span class="soft" style="white-space:nowrap">손이 가는 건</span>
+      <span class="seg" role="group" aria-label="손이 가는 정도"><button type="button" id="eOk" aria-pressed="false">괜찮아요</button><button type="button" id="eNo" aria-pressed="true">귀찮아요</button></span>
+    </p>
+    <p class="need"><span id="yrs">3</span>년이면 <b id="yCups">-</b>잔을 마셔요.</p>
+
+    <details class="adv">
+      <summary>가격 기준 바꾸기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></summary>
+      <div class="grid g3">
+        <div><label for="pCap">캡슐 머신 (원)</label><input id="pCap" type="number" min="0" step="10000" value="100000" inputmode="numeric"></div>
+        <div><label for="pAuto">전자동 머신 (원)</label><input id="pAuto" type="number" min="0" step="10000" value="330000" inputmode="numeric"></div>
+        <div><label for="pSemi">반자동 + 그라인더 (원)</label><input id="pSemi" type="number" min="0" step="10000" value="400000" inputmode="numeric"></div>
+        <div><label for="pDrip">드립 세트 + 그라인더 (원)</label><input id="pDrip" type="number" min="0" step="5000" value="50000" inputmode="numeric"></div>
+        <div><label for="capsule">캡슐 1개 (원)</label><input id="capsule" type="number" min="0" step="10" value="550" inputmode="numeric"></div>
+        <div><label for="kg">원두 1kg (원)</label><input id="kg" type="number" min="0" step="1000" value="29990" inputmode="numeric"></div>
+        <div><label for="gram">1잔 원두 (g)</label><input id="gram" type="number" min="5" max="30" value="15" inputmode="numeric"></div>
+        <div><label for="milk">라떼 우유 1잔 (원)</label><input id="milk" type="number" min="0" step="50" value="400" inputmode="numeric"></div>
+        <div><label for="cafe">카페 1잔 (원)</label><input id="cafe" type="number" min="0" step="100" value="4000" inputmode="numeric"></div>
+        <div><label for="years">비교 기간 (년)</label><input id="years" type="number" min="1" max="5" value="3" inputmode="numeric"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="result" aria-labelledby="out-h" aria-live="polite">
+    <h2 id="out-h"><span id="yrs2">3</span>년 총비용으로 비교하면</h2>
+    <div id="opts"></div>
+    <div class="insight">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
+      <span id="tip"></span>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="shop-h">
+    <h2 id="shop-h">방식별로 많이 팔리는 머신</h2>
+    <p class="shop-lead">쿠팡 랭킹 상위 제품 중에서 골랐어요. 위 결과에서 추천된 방식이 맨 위로 올라와요.</p>
+    <div id="shopGroups">
+      <div class="sgroup" data-k="cap">
+        <h3>캡슐 머신</h3>
+        <a class="item" href="https://link.coupang.com/a/iFaf0SirZI" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 에센자 미니 C30</span><span class="pr">134,980원</span><span class="go">쿠팡에서 보기</span></a>
+        <a class="item" href="https://link.coupang.com/a/iFahu4qhxs" target="_blank" rel="sponsored nofollow noopener"><span class="nm">돌체구스토 지니오S 베이직</span><span class="pr">63,800원</span><span class="go">쿠팡에서 보기</span></a>
+      </div>
+      <div class="sgroup" data-k="auto">
+        <h3>전자동 머신</h3>
+        <a class="item" href="https://link.coupang.com/a/iFai58ZSjA" target="_blank" rel="sponsored nofollow noopener"><span class="nm">필립스 2200 전자동 EP2224</span><span class="pr">330,990원</span><span class="go">쿠팡에서 보기</span></a>
+        <a class="item" href="https://link.coupang.com/a/iFakmkDpHo" target="_blank" rel="sponsored nofollow noopener"><span class="nm">제니퍼룸 전자동 JR-EM0212</span><span class="pr">320,910원</span><span class="go">쿠팡에서 보기</span></a>
+        <a class="item" href="https://link.coupang.com/a/iFalCjQkAm" target="_blank" rel="sponsored nofollow noopener"><span class="nm">필립스 라떼고 3000 EP3347 <small>우유 거품 자동</small></span><span class="pr">508,180원</span><span class="go">쿠팡에서 보기</span></a>
+      </div>
+      <div class="sgroup" data-k="semi">
+        <h3>반자동 머신 <small>그라인더 별도</small></h3>
+        <a class="item" href="https://link.coupang.com/a/iFam1NCHoO" target="_blank" rel="sponsored nofollow noopener"><span class="nm">솔리스 바리스타 TYPE1170S</span><span class="pr">298,000원</span><span class="go">쿠팡에서 보기</span></a>
+        <a class="item" href="https://link.coupang.com/a/iFan8mGhZk" target="_blank" rel="sponsored nofollow noopener"><span class="nm">브레빌 밤비노 BES450</span><span class="pr">420,000원</span><span class="go">쿠팡에서 보기</span></a>
+      </div>
+      <div class="sgroup" data-k="drip">
+        <h3>핸드드립</h3>
+        <a class="item" href="https://link.coupang.com/a/iFapFDA5zU" target="_blank" rel="sponsored nofollow noopener"><span class="nm">하리오 V60 입문용 핸드드립 세트</span><span class="pr">20,500원</span><span class="go">쿠팡에서 보기</span></a>
+        <a class="item" href="https://link.coupang.com/a/iFaqPBb93Y" target="_blank" rel="sponsored nofollow noopener"><span class="nm">까사카페 전동 커피 그라인더</span><span class="pr">27,170원</span><span class="go">쿠팡에서 보기</span></a>
+      </div>
+    </div>
+    <p class="note">가격은 2026년 11월 14일 쿠팡 판매가이며 수시로 바뀌어요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="cmp-h">
+    <h2 id="cmp-h">커피머신 종류별 차이</h2>
+    <div class="tscroll">
+    <table class="cmp">
+      <thead><tr><th>방식</th><th>머신 가격대</th><th>1잔 값</th><th>잘 맞는 사람</th></tr></thead>
+      <tbody>
+        <tr><td>캡슐</td><td>6만~30만 원</td><td>캡슐 1개 값</td><td>하루 1~2잔, 버튼 하나로 끝내고 싶은 사람</td></tr>
+        <tr><td>전자동</td><td>30만~85만 원</td><td>원두 15g 값</td><td>하루 2잔 이상, 원두 맛을 원하지만 손은 덜 가고 싶은 사람</td></tr>
+        <tr><td>반자동</td><td>머신 14만~42만 원 + 그라인더</td><td>원두 15g 값</td><td>추출과 우유 스팀을 직접 다루는 걸 즐기는 사람</td></tr>
+        <tr><td>핸드드립</td><td>2만~5만 원 + 그라인더</td><td>원두 15g 값</td><td>아메리카노 위주, 시간을 들여 내리는 게 괜찮은 사람</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">머신 가격대는 2026년 11월 14일 쿠팡 랭킹 상위 제품 판매가 기준이에요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>캡슐 머신이 결국 더 비싼가요?</dt>
+      <dd>머신은 싸지만 1잔 값이 원두보다 비싸서, 오래 마실수록 차이가 커져요. 캡슐 1개 550원, 원두 1잔 450원이면 하루 2잔 기준 1년에 약 7만 원 차이예요. 하루 잔수가 많고 오래 쓸수록 전자동이 유리해져요. 정품 캡슐처럼 캡슐값이 비싸면 차이는 더 커져요.</dd></div>
+      <div><dt>반자동은 왜 그라인더가 따로 필요한가요?</dt>
+      <dd>반자동은 원두를 직접 갈아 담아야 해요. 그라인더가 내장된 모델이 아니라면 에스프레소용 그라인더를 같이 사야 해서, 위 계산에는 그라인더 값까지 넣었어요.</dd></div>
+      <div><dt>라떼를 자주 마시면 어떤 머신이 좋나요?</dt>
+      <dd>우유 스팀 기능이 있는 전자동이나 반자동이 맞아요. 버튼 하나로 우유 거품까지 내고 싶다면 라떼고처럼 우유 거품 장치가 붙은 전자동을 보세요. 핸드드립은 라떼용 에스프레소를 만들기 어려워요.</dd></div>
+      <div><dt>카페에서 사 마시는 것보다 정말 싼가요?</dt>
+      <dd>카페 1잔 4,000원 기준이면 대부분 몇 달 안에 머신값을 뽑아요. 위 결과의 회수 기간은 내가 넣은 카페 가격과 하루 잔수로 계산돼요.</dd></div>
+    </dl>
+  </section>
+
+  <section class="sec" aria-labelledby="rel-h">
+    <h2 id="rel-h">같이 쓰면 좋은 계산기</h2>
+    <div class="rel">
+      <a href="/coffee-beans-1kg/"><b>원두 1kg 몇 잔?</b><span>머신을 샀다면, 원두는 몇 g짜리를 사야 신선할 때 다 마실까요</span></a>
+      <a href="/office-coffee-cost/"><b>사무실 커피 비용</b><span>회사에 둘 머신이라면 인원수로 렌탈·캡슐·카페 월 비용을 비교해요</span></a>
+    </div>
+  </section>
+
+  <div class="src">
+    계산 기준 (2026년 11월 14일 확인)
+    <ul>
+      <li>머신 가격 기본값: 쿠팡 랭킹 상위 제품 판매가 기준. 캡슐 6.4만~13.5만 원 → 10만 원, 전자동 32만~51만 원 → 33만 원, 반자동 30만~42만 원 + 그라인더 약 10만 원 → 40만 원, 핸드드립 세트 2만 원 + 전동 그라인더 2.7만 원 → 5만 원.</li>
+      <li>캡슐 1개 550원: 쿠팡 네스프레소 호환 캡슐 세트 판매가 기준(개당 약 280~620원). 정품 캡슐은 더 비쌀 수 있으니 직접 바꿔 넣으세요.</li>
+      <li>원두 1kg 29,990원, 1잔 15g: 쿠팡 곰곰 콜롬비아 블렌드 1kg 판매가, 잔값 원두 계산기와 같은 기준.</li>
+      <li>비교 기간 3년: 머신을 3년 쓴다고 가정한 기본값이에요. 라떼 우유 1잔 400원, 카페 1잔 4,000원도 바꿀 수 있는 기본값이에요.</li>
+      <li>전기료, 세척용품, 고장 수리비는 넣지 않았어요.</li>
+    </ul>
+  </div>
+</Base>
+
+<style is:global>
+.shop-lead{color:var(--body);margin:0 0 16px}
+.sgroup{padding:16px 0;border-top:1px solid var(--hair)}
+.sgroup:last-child{border-bottom:1px solid var(--hair)}
+.sgroup h3{margin:0 0 10px;font-size:var(--s3)}
+.sgroup h3 small,.sgroup .nm small{font-weight:400;font-size:var(--s1);color:var(--body);margin-left:6px}
+.sgroup.pick h3::after{content:"추천";display:inline-block;margin-left:8px;border:1px solid var(--espresso);color:var(--espresso);border-radius:4px;font-size:11.5px;padding:3px 6px;vertical-align:2px}
+.sgroup .item{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 14px;margin-top:8px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);background:#fff}
+.sgroup .item:hover{border-color:var(--espresso)}
+.sgroup.pick .item{background:var(--crema);border-color:var(--espresso)}
+.sgroup .nm{font-size:var(--s2)}
+.sgroup .pr{font-weight:700;font-variant-numeric:tabular-nums}
+.sgroup .go{font-size:var(--s1);font-weight:700;color:var(--espresso);white-space:nowrap}
+@media (max-width:520px){.sgroup .item{grid-template-columns:1fr auto}.sgroup .go{display:none}}
+.opt .tags{display:block;font-weight:400;font-size:var(--s1);color:#A35A1F}
+.opt.off .won{color:var(--body)}
+.opt.ref .name{color:var(--body)}
+.tscroll{overflow-x:auto}
+table.cmp td,table.cmp th{text-align:left;vertical-align:top}
+table.cmp td{font-weight:400;color:var(--body)}
+table.cmp td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.rel{display:grid;gap:10px}
+.rel a{display:block;padding:16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body)}
+.rel a:hover{border-color:var(--espresso)}
+.rel b{display:block;color:var(--ink);font-size:var(--s3)}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const man=n=>{const m=n/10000;return (m>=10?Math.round(m):Math.round(m*10)/10).toLocaleString('ko-KR')+'만 원';};
+const num=id=>Math.max(0,parseFloat($(id).value)||0);
+let latte=false, lazy=true;
+function seg(a,b,val){$(a).setAttribute('aria-pressed',String(!val));$(b).setAttribute('aria-pressed',String(val));}
+$('mAme').onclick=()=>{latte=false;seg('mAme','mLat',false);calc();};
+$('mLat').onclick=()=>{latte=true;seg('mAme','mLat',true);calc();};
+$('eOk').onclick=()=>{lazy=false;seg('eOk','eNo',false);calc();};
+$('eNo').onclick=()=>{lazy=true;seg('eOk','eNo',true);calc();};
+
+function calc(){
+  const cups=num('cups'), years=Math.max(1,Math.round(num('years'))||3);
+  const n=cups*365*years, budget=num('budget')*10000;
+  const bean=num('kg')/1000*(num('gram')||15), milk=latte?num('milk'):0, cafe=num('cafe');
+  $('yrs').textContent=years; $('yrs2').textContent=years;
+  $('yCups').textContent=Math.round(n).toLocaleString('ko-KR');
+  const M=[
+    {k:'cap',name:'캡슐 머신',machine:num('pCap'),cup:num('capsule')+milk},
+    {k:'auto',name:'전자동 머신',machine:num('pAuto'),cup:bean+milk},
+    {k:'semi',name:'반자동 머신',machine:num('pSemi'),cup:bean+milk,hands:true},
+    {k:'drip',name:'핸드드립',machine:num('pDrip'),cup:bean,hands:true,noLatte:true}
+  ];
+  M.forEach(m=>{
+    m.total=m.machine+m.cup*n; m.tags=[];
+    if(m.machine>budget) m.tags.push('예산 초과');
+    if(latte&&m.noLatte) m.tags.push('라떼 어려움');
+    if(lazy&&m.hands) m.tags.push('손이 많이 가요');
+    m.ok=m.tags.length===0;
+  });
+  const ok=M.filter(m=>m.ok);
+  const pick=(ok.length?ok:M.filter(m=>!(latte&&m.noLatte))).reduce((a,b)=>a.total<=b.total?a:b);
+  const cafeTotal=cafe*n;
+  const max=Math.max(cafeTotal,...M.map(m=>m.total),1);
+  const rows=M.slice().sort((a,b)=>a.total-b.total);
+  let html=rows.map(m=>`
+    <div class="opt${m===pick?' pick':''}${m.ok?'':' off'}">
+      <div class="name">${m.name}${m===pick?'<span class="badge">추천</span>':''}<small>머신 ${man(m.machine)} + 1잔 ${won(m.cup)}</small>${m.tags.length?'<span class="tags">'+m.tags.join(', ')+'</span>':''}</div>
+      <div class="won">${won(m.total)}<span class="per">${years}년 총비용</span></div>
+      <div class="bar"><i style="width:${(m.total/max*100).toFixed(1)}%"></i></div>
+    </div>`).join('');
+  html+=`<div class="opt ref"><div class="name">카페에서 사 마시면<small>1잔 ${won(cafe)}</small></div><div class="won">${won(cafeTotal)}<span class="per">${years}년</span></div><div class="bar"><i style="width:${(cafeTotal/max*100).toFixed(1)}%"></i></div></div>`;
+  $('opts').innerHTML=html;
+
+  let t;
+  if(cups<=0){t='하루 잔수를 입력해주세요.';}
+  else{
+    const gain=cafe-pick.cup;
+    const months=gain>0?pick.machine/(cups*30.4*gain):Infinity;
+    const pay=isFinite(months)?(months<1?'한 달이 안 돼서':`약 ${Math.ceil(months)}개월이면`):'';
+    const why=ok.length?'':' (조건에 다 맞는 방식이 없어서, 예산을 조금 넘더라도 가장 싼 방식을 골랐어요.)';
+    t=`추천은 <b>${pick.name}</b>이에요. ${years}년에 ${won(pick.total)}, 카페보다 ${won(Math.max(0,cafeTotal-pick.total))} 아껴요.`+
+      (pay?`<br><b>${pay} 머신값을 뽑아요.</b>`:'')+why;
+  }
+  $('tip').innerHTML=t;
+
+  const box=$('shopGroups');
+  const g=[...box.querySelectorAll('.sgroup')];
+  g.forEach(el=>el.classList.toggle('pick',el.dataset.k===pick.k));
+  const first=g.find(el=>el.dataset.k===pick.k);
+  if(first&&box.firstElementChild!==first) box.insertBefore(first,box.firstElementChild);
+}
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
+calc();
+</script>
