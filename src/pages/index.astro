@@ -35,6 +35,16 @@ import Base from '../layouts/Base.astro';
       <div class="dots" id="dots" role="img" aria-label="원두 1kg으로 내릴 수 있는 66잔을 점으로 표시"></div>
       <figcaption>진한 점 하나가 한 잔이에요. 하루 <span id="fCups">2</span>잔이면 <span id="fDays">33</span>일, 개봉 후 4주 안에 다 마시기엔 <span id="fVerdict">조금 길어요. 500g을 추천해요.</span></figcaption>
     </figure>
+    <div class="fit-card" aria-live="polite">
+      <div class="dots-top"><span>용량별로 며칠 가요?</span><span class="cnt">하루 <span id="kCups">2</span>잔 기준</span></div>
+      <div class="fit-rows">
+        <div class="fit" data-g="250"><b>250g</b><span class="d"></span><span class="t"></span></div>
+        <div class="fit" data-g="500"><b>500g</b><span class="d"></span><span class="t"></span></div>
+        <div class="fit" data-g="1000"><b>1kg</b><span class="d"></span><span class="t"></span></div>
+      </div>
+      <p class="fit-note">개봉 후 4주(28일) 안에 다 마실 수 있는 가장 큰 용량을 추천해요. 큰 용량일수록 1잔 단가가 싸요.</p>
+      <a class="more" href="/coffee-beans-1kg/">가격까지 넣어서 계산하기</a>
+    </div>
   </section>
 
   <section id="tools" class="tools-sec" aria-labelledby="tools-h">
@@ -118,8 +128,20 @@ import Base from '../layouts/Base.astro';
   .cta:hover{background:var(--crema)}
   .note{font-size:13px;color:#E2D6CB}
 
-  .dots-sec{max-width:1120px;margin:0 auto;padding:40px 24px 8px}
-  .dots-card{margin:0;max-width:520px;padding:24px;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:16px}
+  .dots-sec{max-width:1120px;margin:0 auto;padding:40px 24px 8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch}
+  .fit-card{padding:24px;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:16px}
+  .fit-rows{display:flex;flex-direction:column}
+  .fit{display:grid;grid-template-columns:64px 1fr auto;align-items:baseline;gap:12px;padding:14px 0;border-top:1px solid var(--hair)}
+  .fit:last-child{border-bottom:1px solid var(--hair)}
+  .fit b{font-size:17px}
+  .fit .d{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+  .fit .t{font-size:13px;color:var(--body)}
+  .fit.over .t{color:#A35A1F}
+  .fit.pick .d{color:var(--espresso)}
+  .fit.pick .t{color:var(--espresso);font-weight:700}
+  .fit-note{margin:0;font-size:13px;line-height:1.55;color:var(--body)}
+  .fit-card .more{margin-top:auto}
+  .dots-card{margin:0;padding:24px;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:16px}
   .dots-top{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
   .dots-top .cnt{font-weight:400;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
   .dots{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:8px}
@@ -169,7 +191,8 @@ import Base from '../layouts/Base.astro';
     .hero-ph img{object-position:30% 52%}
     .hero-in{padding:36px 20px 40px;gap:24px}
     .big{font-size:34px}
-    .dots-sec{padding:32px 20px 8px}
+    .dots-sec{padding:32px 20px 8px;grid-template-columns:1fr;gap:16px}
+    .fit-card{padding:20px}
     .dots-card{padding:20px}
     .in{padding:48px 20px}
     .in h2{font-size:24px}
@@ -196,6 +219,14 @@ import Base from '../layouts/Base.astro';
     ['hCups','fCups'].forEach(function(id){document.getElementById(id).textContent=c;});
     ['hDays','fDays'].forEach(function(id){document.getElementById(id).textContent=d;});
     document.getElementById('fVerdict').textContent=d<=28?'딱 맞아요.':'조금 길어요. 500g을 추천해요.';
+    document.getElementById('kCups').textContent=c;
+    var rows=[].slice.call(document.querySelectorAll('.fit')),pick=null;
+    rows.forEach(function(r){var days=Math.round(+r.dataset.g/(c*15));r.dataset.days=days;if(days<=28)pick=r;});
+    if(!pick)pick=rows[0];
+    rows.forEach(function(r){var days=+r.dataset.days,over=days>28;
+      r.querySelector('.d').textContent=days+'일';
+      r.classList.toggle('over',over);r.classList.toggle('pick',r===pick);
+      r.querySelector('.t').textContent=r===pick?'추천':(over?'4주를 넘겨요':'');});
     document.querySelectorAll('.pills button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.c===c));});
   }
   document.querySelectorAll('.pills button').forEach(function(b){b.addEventListener('click',function(){setCups(+b.dataset.c);});});
