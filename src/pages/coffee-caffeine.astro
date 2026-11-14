@@ -1,0 +1,179 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+const drinks = [
+  { b: '스타벅스', n: '카페 아메리카노', s: 'Tall 355ml', mg: 150 },
+  { b: '스타벅스', n: '아이스 카페 아메리카노', s: 'Tall 355ml', mg: 150 },
+  { b: '스타벅스', n: '카페 라떼', s: 'Tall 355ml', mg: 75 },
+  { b: '스타벅스', n: '카푸치노', s: 'Tall 355ml', mg: 75 },
+  { b: '스타벅스', n: '카라멜 마키아또', s: 'Tall 355ml', mg: 75 },
+  { b: '스타벅스', n: '카페 모카', s: 'Tall 355ml', mg: 95 },
+  { b: '스타벅스', n: '콜드 브루', s: 'Tall 355ml', mg: 155 },
+  { b: '스타벅스', n: '바닐라 크림 콜드 브루', s: 'Tall 355ml', mg: 135 },
+  { b: '스타벅스', n: '에스프레소', s: '솔로', mg: 75 },
+  { b: '메가MGC커피', n: '아메리카노 (HOT)', s: '591ml', mg: 236 },
+  { b: '메가MGC커피', n: '아메리카노 (ICE)', s: '710ml', mg: 236 },
+  { b: '메가MGC커피', n: '메가리카노', s: '946ml', mg: 354 },
+  { b: '메가MGC커피', n: '카페라떼', s: '591ml', mg: 236 },
+  { b: '메가MGC커피', n: '콜드브루라떼 (ICE)', s: '591ml', mg: 157.5 },
+  { b: '메가MGC커피', n: '에스프레소', s: '59ml', mg: 118 },
+  { b: '메가MGC커피', n: '디카페인 아메리카노 (ICE)', s: '710ml', mg: 7.8 },
+  { b: '이디야', n: '카푸치노 (L)', s: '520ml', mg: 202 },
+  { b: '이디야', n: '카푸치노 (EX)', s: '650ml', mg: 303 },
+  { b: '이디야', n: '디카페인 카푸치노 (L)', s: '520ml', mg: 7 },
+];
+const fmt = (n: number) => (Number.isInteger(n) ? n : n.toFixed(1)).toLocaleString();
+---
+<Base title="커피 카페인 함량표: 스타벅스·메가커피·이디야 한 잔 몇 mg" description="스타벅스, 메가커피, 이디야 커피 카페인 함량을 공식 영양정보 기준으로 비교하고, 오늘 마신 커피가 하루 섭취 권고량의 몇 %인지 계산해보세요." path="/coffee-caffeine/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.">
+  <PageHero slot="hero" eyebrow="카페인 계산기" title="커피 카페인 함량표: 오늘 몇 잔까지 괜찮을까?" img="/img/band-machine.webp" imgM="/img/band-machine-m.webp" />
+
+  <p class="lead">커피 카페인 함량은 브랜드와 사이즈마다 두 배 넘게 차이 나요. 오늘 마신 커피를 고르면 하루 섭취 권고량 대비 몇 %인지, 몇 잔 더 마셔도 되는지 알려드려요. 함량은 각 브랜드 공식 영양정보 기준이에요.</p>
+
+  <section aria-label="섭취 기준 선택">
+    <p class="sentence">
+      나는 <span class="seg" role="group" aria-label="섭취 기준"><button type="button" id="gA" aria-pressed="true">성인</button><button type="button" id="gP" aria-pressed="false">임산부</button><button type="button" id="gT" aria-pressed="false">청소년</button></span>
+      <span id="wWrap" hidden>, 몸무게 <input class="fill" id="weight" type="number" min="20" max="120" value="50" inputmode="numeric" aria-label="몸무게(kg)">kg</span><span id="sfx">이에요.</span>
+    </p>
+    <p class="need">하루 권고량은 <b id="limit">400</b>mg 이하예요.</p>
+  </section>
+
+  <section class="result" aria-labelledby="out-h">
+    <h2 id="out-h">오늘 마신 커피를 골라보세요</h2>
+    <div class="meter" aria-live="polite">
+      <div class="m-top"><span>오늘 섭취량</span><b><span id="total">0</span>mg <small>/ <span id="limit2">400</span>mg</small></b></div>
+      <div class="bar"><i id="mbar" style="width:0%"></i></div>
+      <p id="mtext" class="m-text">아래에서 마신 커피 옆 + 버튼을 눌러주세요.</p>
+    </div>
+    <div class="dlist" id="dlist">
+      {['스타벅스','메가MGC커피','이디야'].map(brand => (
+        <div class="dgroup">
+          <h3>{brand}</h3>
+          {drinks.filter(d => d.b === brand).map(d => (
+            <div class="drow" data-mg={d.mg}>
+              <span class="dn">{d.n}<small>{d.s}</small></span>
+              <span class="dmg">{fmt(d.mg)}mg</span>
+              <span class="step">
+                <button type="button" class="minus" aria-label={`${d.n} 한 잔 빼기`}>−</button>
+                <output class="cnt">0</output>
+                <button type="button" class="plus" aria-label={`${d.n} 한 잔 더하기`}>+</button>
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="tbl-h">
+    <h2 id="tbl-h">커피 카페인 함량 순위</h2>
+    <div class="tscroll">
+    <table>
+      <thead><tr><th>메뉴</th><th>사이즈</th><th>카페인</th><th>성인 권고량 대비</th></tr></thead>
+      <tbody>
+        {[...drinks].sort((a, b) => b.mg - a.mg).map(d => (
+          <tr><td>{d.b} {d.n}</td><td>{d.s}</td><td>{fmt(d.mg)}mg</td><td>{Math.round(d.mg / 4)}%</td></tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+    <p class="note">같은 메뉴라도 사이즈를 키우거나 샷을 추가하면 카페인이 늘어나요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="tip-h">
+    <h2 id="tip-h">카페인 줄이는 방법</h2>
+    <ul class="tips">
+      <li><b>사이즈부터 확인해요.</b> 같은 아메리카노도 브랜드마다 기본 샷 수와 컵 크기가 달라서 카페인이 150mg부터 350mg 넘게까지 차이 나요.</li>
+      <li><b>라떼는 아메리카노보다 적을 수 있어요.</b> 우유가 들어가는 만큼 샷이 적은 메뉴가 많아요. 스타벅스 Tall 기준 카페 라떼는 75mg, 아메리카노는 150mg이에요.</li>
+      <li><b>디카페인으로 바꿔요.</b> 디카페인 메뉴도 카페인이 아주 조금 남아 있지만 한 잔에 10mg 안팎이에요.</li>
+      <li><b>집에서는 1잔 원두 양으로 조절해요.</b> 원두 양을 줄이거나 디카페인 원두·캡슐을 섞으면 맛은 유지하면서 카페인을 줄일 수 있어요.</li>
+    </ul>
+    <a class="deca" href="https://link.coupang.com/a/iFbJc1UlG0" target="_blank" rel="sponsored nofollow noopener"><span><b>집에서 디카페인으로 바꾸려면</b>네스프레소 아르페지오 디카페나토 (오리지널 정품 캡슐 10개)</span><span class="go">쿠팡에서 보기</span></a>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>하루 카페인 권고량은 얼마인가요?</dt>
+      <dd>식품의약품안전처는 카페인 최대 일일섭취권고량을 성인 400mg 이하, 임산부 300mg 이하, 어린이·청소년은 체중 1kg당 2.5mg 이하로 정하고 있어요.</dd></div>
+      <div><dt>아메리카노 한 잔에 카페인이 얼마나 들어 있나요?</dt>
+      <dd>공식 영양정보 기준으로 스타벅스 Tall은 150mg, 메가MGC커피 아메리카노는 236mg이에요. 메가리카노(946ml)는 354mg이라 한 잔으로 성인 권고량의 약 89%예요.</dd></div>
+      <div><dt>권고량보다 적게 마셔도 잠이 안 와요.</dt>
+      <dd>카페인 민감도는 사람마다 달라서, 권고량 이내라도 두근거림이나 수면 장애가 있으면 양을 줄이는 게 좋아요. 건강 상태가 걱정되면 의사나 약사와 상담하세요.</dd></div>
+    </dl>
+  </section>
+
+  <RelatedTools current="/coffee-caffeine/" />
+
+  <div class="src">
+    출처 (2026년 11월 14일 확인)
+    <ul>
+      <li>스타벅스: 스타벅스 코리아 공식 홈페이지 메뉴별 제품 영양 정보(Tall 355ml, 에스프레소는 솔로 기준).</li>
+      <li>메가MGC커피: 메가MGC커피 공식 홈페이지 메뉴 영양정보.</li>
+      <li>이디야: 이디야커피 공식 홈페이지 메뉴 영양정보.</li>
+      <li>하루 권고량: 식품의약품안전처 카페인 최대 일일섭취권고량(성인 400mg, 임산부 300mg, 어린이·청소년 2.5mg/kg).</li>
+      <li>이 페이지는 일반 정보이며 의료 조언이 아니에요.</li>
+    </ul>
+  </div>
+
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
+</Base>
+
+<style is:global>
+.meter{padding:18px;border:1px solid var(--line);border-radius:12px;margin-bottom:20px;position:sticky;top:0;background:#fff;z-index:2}
+.m-top{display:flex;justify-content:space-between;align-items:baseline}
+.m-top b{font-size:var(--s4);font-variant-numeric:tabular-nums}
+.m-top small{font-size:var(--s1);font-weight:400;color:var(--body)}
+.meter .bar{margin-top:10px}
+.meter .bar i.over{background:#A35A1F}
+.meter .bar i.on{background:var(--espresso)}
+.m-text{margin:10px 0 0;color:var(--body);font-size:var(--s2)}
+.dgroup{padding:8px 0 4px}
+.dgroup h3{margin:12px 0 4px;font-size:var(--s3)}
+.drow{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--hair)}
+.drow.has{background:var(--crema);margin:0 -10px;padding:10px;border-radius:8px}
+.dn{font-size:var(--s2)}
+.dn small{display:block;font-size:var(--s1);color:var(--body)}
+.dmg{font-variant-numeric:tabular-nums;color:var(--body);font-size:14px}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:18px;font-weight:700;color:var(--ink);cursor:pointer;line-height:1}
+.step button.plus{border-color:var(--espresso);color:var(--espresso)}
+.step .cnt{min-width:18px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.tscroll{overflow-x:auto}
+.tips{list-style:none;padding:0;margin:0}
+.tips li{padding:14px 0;border-bottom:1px solid var(--hair);color:var(--body)}
+.tips li:first-child{border-top:1px solid var(--hair)}
+.tips li b{display:block;color:var(--ink);font-size:var(--s3);margin-bottom:2px}
+.deca{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body)}
+.deca:hover{border-color:var(--espresso)}
+.deca b{display:block;color:var(--ink)}
+.deca .go{font-size:var(--s1);font-weight:700;color:var(--espresso);white-space:nowrap}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+let group='A';
+const fmt=n=>(Math.round(n*10)/10).toLocaleString('ko-KR');
+function limit(){if(group==='P')return 300;if(group==='T')return Math.round((parseFloat($('weight').value)||0)*2.5);return 400;}
+function setGroup(g){group=g;['gA','gP','gT'].forEach(id=>$(id).setAttribute('aria-pressed',String(id==='g'+g)));$('wWrap').hidden=g!=='T';$('sfx').textContent=g==='P'?'예요.':'이에요.';calc();}
+$('gA').onclick=()=>setGroup('A');$('gP').onclick=()=>setGroup('P');$('gT').onclick=()=>setGroup('T');
+$('weight').addEventListener('input',calc);
+document.querySelectorAll('.drow').forEach(r=>{
+  const c=r.querySelector('.cnt');
+  r.querySelector('.plus').onclick=()=>{c.textContent=+c.textContent+1;calc();};
+  r.querySelector('.minus').onclick=()=>{c.textContent=Math.max(0,+c.textContent-1);calc();};
+});
+function calc(){
+  const L=limit();let total=0;
+  document.querySelectorAll('.drow').forEach(r=>{const k=+r.querySelector('.cnt').textContent;total+=k*parseFloat(r.dataset.mg);r.classList.toggle('has',k>0);});
+  $('limit').textContent=L;$('limit2').textContent=L;$('total').textContent=fmt(total);
+  const pct=L>0?total/L*100:0;const bar=$('mbar');bar.style.width=Math.min(100,pct).toFixed(1)+'%';
+  bar.classList.toggle('over',pct>100);bar.classList.toggle('on',pct>0&&pct<=100);
+  let t;
+  if(total===0) t='아래에서 마신 커피 옆 + 버튼을 눌러주세요.';
+  else if(pct>100) t=`<b>권고량을 ${fmt(total-L)}mg 넘었어요.</b> 오늘은 디카페인이나 물로 바꾸는 게 좋아요.`;
+  else{const left=L-total;t=`권고량의 <b>${Math.round(pct)}%</b>예요. ${fmt(left)}mg 남았어요. 스타벅스 아메리카노 Tall 기준 ${Math.floor(left/150)}잔 더 마실 수 있어요.`;}
+  $('mtext').innerHTML=t;
+}
+calc();
+</script>
