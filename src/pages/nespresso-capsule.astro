@@ -1,0 +1,177 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+<Base title="네스프레소 캡슐 추천: 정품 vs 호환 1잔 값 비교" description="네스프레소 캡슐 종류가 많아 고르기 어렵다면, 오리지널·버츄오 라인과 맛 취향을 고르세요. 정품과 호환 캡슐의 한 달 비용 차이와 취향에 맞는 캡슐을 알려드려요." path="/nespresso-capsule/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.">
+  <PageHero slot="hero" eyebrow="캡슐 계산기" title="네스프레소 캡슐 추천: 정품 vs 호환 1잔 값 비교" img="/img/band-capsule.webp" imgM="/img/band-capsule-m.webp" />
+
+  <p class="lead">네스프레소 캡슐 종류가 너무 많죠. 내 머신 라인과 하루 잔수, 맛 취향만 고르면 정품과 호환 캡슐의 한 달 비용 차이, 그리고 취향에 맞는 캡슐을 바로 보여드려요.</p>
+
+  <section aria-label="캡슐 조건 입력">
+    <p class="sentence">
+      내 머신은 <span class="seg" role="group" aria-label="머신 라인"><button type="button" id="lO" aria-pressed="true">오리지널</button><button type="button" id="lV" aria-pressed="false">버츄오</button></span>,
+      하루 <input class="fill" id="cups" type="number" min="0.5" step="0.5" value="2" inputmode="decimal" aria-label="하루 잔수">잔,
+      <span class="seg" role="group" aria-label="맛 취향"><button type="button" id="tS" aria-pressed="true">부드러운</button><button type="button" id="tB" aria-pressed="false">진한</button></span> 맛을
+      <span class="seg" role="group" aria-label="마시는 방법"><button type="button" id="mB" aria-pressed="true">그대로</button><button type="button" id="mL" aria-pressed="false">라떼로</button></span>
+      <span class="soft" style="white-space:nowrap">마셔요.</span>
+    </p>
+    <p class="need">한 달이면 캡슐 <b id="mCaps">-</b>개를 써요.</p>
+
+    <details class="adv">
+      <summary>캡슐 가격 바꾸기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></summary>
+      <div class="grid g3">
+        <div><label for="pOG">오리지널 정품 1개 (원)</label><input id="pOG" type="number" min="0" step="10" value="700" inputmode="numeric"></div>
+        <div><label for="pOC">브랜드 호환 1개 (원)</label><input id="pOC" type="number" min="0" step="10" value="590" inputmode="numeric"></div>
+        <div><label for="pOB">대용량 호환 1개 (원)</label><input id="pOB" type="number" min="0" step="10" value="280" inputmode="numeric"></div>
+        <div><label for="pVE">버츄오 에스프레소 1개 (원)</label><input id="pVE" type="number" min="0" step="10" value="1180" inputmode="numeric"></div>
+        <div><label for="pVM">버츄오 머그 1개 (원)</label><input id="pVM" type="number" min="0" step="10" value="1530" inputmode="numeric"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="result" aria-labelledby="out-h" aria-live="polite">
+    <h2 id="out-h">한 달 캡슐 비용</h2>
+    <div id="opts"></div>
+    <div class="insight">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
+      <span id="tip"></span>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="pick-h">
+    <h2 id="pick-h">내 취향에 맞는 캡슐</h2>
+    <p class="cap-lead">고른 머신 라인에서 쓸 수 있는 캡슐만 보여드려요. 취향에 가장 맞는 캡슐이 맨 위에 와요.</p>
+    <div id="caps">
+      <a class="cap" data-line="O" data-kind="정품" data-t="S" data-milk="1" href="https://link.coupang.com/a/iFbHRJodhI" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 볼루토 <small>정품 · 가볍고 달콤한 맛</small></span><span class="pr">6,990원 <small>10개, 1개 699원</small></span></a>
+      <a class="cap" data-line="O" data-kind="정품" data-t="B" data-milk="1" href="https://link.coupang.com/a/iFbK33ABwa" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 카자르 <small>정품 · 아주 진하고 쓴 맛</small></span><span class="pr">6,990원 <small>10개, 1개 699원</small></span></a>
+      <a class="cap" data-line="O" data-kind="정품" data-t="M" data-milk="2" href="https://link.coupang.com/a/iFbN9JEAhg" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 바리스타 4종 세트 <small>정품 · 우유와 섞도록 만든 라인</small></span><span class="pr">47,600원 <small>40개, 1개 1,190원</small></span></a>
+      <a class="cap" data-line="O" data-kind="정품" data-t="B" data-milk="1" data-decaf="1" href="https://link.coupang.com/a/iFbJc1UlG0" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 아르페지오 디카페나토 <small>정품 · 디카페인, 진한 맛</small></span><span class="pr">6,990원 <small>10개, 1개 699원</small></span></a>
+      <a class="cap" data-line="O" data-kind="호환" data-t="S" data-milk="1" href="https://link.coupang.com/a/iFbPVbQebs" target="_blank" rel="sponsored nofollow noopener"><span class="nm">일리 클라시코 <small>호환 · 미디엄 로스트, 부드러운 맛</small></span><span class="pr">12,470원 <small>20개, 1개 624원</small></span></a>
+      <a class="cap" data-line="O" data-kind="호환" data-t="B" data-milk="1" href="https://link.coupang.com/a/iFbS0EeV3Z" target="_blank" rel="sponsored nofollow noopener"><span class="nm">일리 인텐소 <small>호환 · 다크 로스트, 진한 맛</small></span><span class="pr">27,450원 <small>50개, 1개 549원</small></span></a>
+      <a class="cap" data-line="O" data-kind="호환" data-t="X" data-milk="1" href="https://link.coupang.com/a/iFbUi2YJgW" target="_blank" rel="sponsored nofollow noopener"><span class="nm">네스프레소 호환 캡슐 80개입 <small>호환 · 1잔 값이 가장 싼 대용량</small></span><span class="pr">22,250원 <small>80개, 1개 278원</small></span></a>
+      <a class="cap" data-line="V" data-kind="정품" data-t="S" data-milk="1" href="https://link.coupang.com/a/iFbEP4ficS" target="_blank" rel="sponsored nofollow noopener"><span class="nm">버츄오 볼테소 <small>정품 · 가볍고 달콤한 에스프레소</small></span><span class="pr">12,400원 <small>10개, 1개 1,240원</small></span></a>
+      <a class="cap" data-line="V" data-kind="정품" data-t="B" data-milk="1" href="https://link.coupang.com/a/iFbF8BT3HE" target="_blank" rel="sponsored nofollow noopener"><span class="nm">버츄오 알티시오 <small>정품 · 묵직하고 진한 에스프레소</small></span><span class="pr">11,290원 <small>10개, 1개 1,129원</small></span></a>
+    </div>
+    <p class="note">가격은 2026년 11월 14일 쿠팡 판매가이며 수시로 바뀌어요. 맛 설명은 각 제품 소개 기준이에요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="line-h">
+    <h2 id="line-h">네스프레소 캡슐 종류: 오리지널 vs 버츄오</h2>
+    <div class="tscroll">
+    <table class="cmp">
+      <thead><tr><th>구분</th><th>오리지널</th><th>버츄오</th></tr></thead>
+      <tbody>
+        <tr><td>잔 크기</td><td>에스프레소·룽고 위주</td><td>에스프레소부터 머그 크기까지 캡슐마다 다름</td></tr>
+        <tr><td>호환 캡슐</td><td>여러 브랜드에서 나와 선택지가 많음</td><td>선택지가 적어 대부분 정품을 씀</td></tr>
+        <tr><td>1개 가격</td><td>정품 약 700원, 호환 280~620원</td><td>정품 약 1,100~1,500원</td></tr>
+        <tr><td>잘 맞는 사람</td><td>캡슐값을 아끼고 싶은 사람, 에스프레소·라떼 위주</td><td>머그 한 잔을 버튼 하나로 내리고 싶은 사람</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">캡슐은 같은 라인끼리만 맞아요. 오리지널 캡슐은 버츄오 머신에 들어가지 않고, 반대도 마찬가지예요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>호환 캡슐을 써도 괜찮나요?</dt>
+      <dd>오리지널 머신용 호환 캡슐은 널리 쓰여요. 다만 브랜드마다 크기와 재질이 조금씩 달라서, 처음에는 소량을 사서 내 머신에서 잘 추출되는지 확인하는 게 좋아요. 보증 조건은 머신 제조사 안내를 확인하세요.</dd></div>
+      <div><dt>정품에서 호환으로 바꾸면 얼마나 아끼나요?</dt>
+      <dd>하루 2잔이면 한 달에 캡슐 약 61개를 써요. 정품 700원과 대용량 호환 280원의 차이는 한 달 약 2만 5천 원이에요. 위 계산기에서 내 잔수로 바로 확인하세요.</dd></div>
+      <div><dt>라떼용 캡슐은 따로 있나요?</dt>
+      <dd>네스프레소 바리스타 라인처럼 우유와 섞었을 때 맛이 살도록 만든 캡슐이 있어요. 일반 캡슐도 진한 맛을 고르면 우유에 묻히지 않아요.</dd></div>
+      <div><dt>버츄오는 왜 더 비싼가요?</dt>
+      <dd>버츄오는 캡슐에 담기는 원두 양과 잔 크기가 다양하고, 호환 캡슐이 적어 가격 경쟁이 덜해요. 머그 크기 캡슐 대신 에스프레소 캡슐에 물을 더하면 1잔 값을 줄일 수 있어요.</dd></div>
+    </dl>
+  </section>
+
+  <RelatedTools current="/nespresso-capsule/" />
+
+  <div class="src">
+    계산 기준 (2026년 11월 14일 확인)
+    <ul>
+      <li>오리지널 정품 700원: 쿠팡 네스프레소 정품 10개입(볼루토·카자르·아르페지오 등) 판매가 6,990원 기준. 일부 제품은 1개 약 770~960원이에요.</li>
+      <li>브랜드 호환 590원: 일리 클라시코 20개 12,470원(624원), 일리 인텐소 50개 27,450원(549원)의 평균. 대용량 호환 280원: 80개입 22,250원 기준.</li>
+      <li>버츄오 에스프레소 1,180원: 알티시오 10개 11,290원, 볼테소 10개 12,400원 평균. 버츄오 머그 1,530원: 스토미오 10개 15,280원 기준.</li>
+      <li>한 달은 30.4일로 계산했어요.</li>
+    </ul>
+  </div>
+
+  <p slot="credit">상단 사진: Andrijana Bozic / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
+</Base>
+
+<style is:global>
+.cap-lead{color:var(--body);margin:0 0 12px}
+.cap{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 16px;margin-top:8px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink);background:#fff}
+.cap:hover{border-color:var(--espresso)}
+.cap.top{background:var(--crema);border-color:var(--espresso)}
+.cap.top .nm::before{content:"추천";display:inline-block;margin-right:8px;border:1px solid var(--espresso);color:var(--espresso);border-radius:4px;font-size:11.5px;font-weight:700;padding:2px 6px;vertical-align:1px}
+.cap.hide{display:none}
+.cap .nm{font-weight:700}
+.cap .nm small,.cap .pr small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
+.cap .pr{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tscroll{overflow-x:auto}
+table.cmp td,table.cmp th{text-align:left;vertical-align:top}
+table.cmp td{font-weight:400;color:var(--body)}
+table.cmp td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+const num=id=>Math.max(0,parseFloat($(id).value)||0);
+let line='O', taste='S', milk=false;
+function seg(a,b,second){$(a).setAttribute('aria-pressed',String(!second));$(b).setAttribute('aria-pressed',String(second));}
+$('lO').onclick=()=>{line='O';seg('lO','lV',false);calc();};
+$('lV').onclick=()=>{line='V';seg('lO','lV',true);calc();};
+$('tS').onclick=()=>{taste='S';seg('tS','tB',false);calc();};
+$('tB').onclick=()=>{taste='B';seg('tS','tB',true);calc();};
+$('mB').onclick=()=>{milk=false;seg('mB','mL',false);calc();};
+$('mL').onclick=()=>{milk=true;seg('mB','mL',true);calc();};
+
+function calc(){
+  const cups=num('cups'), n=cups*30.4;
+  $('mCaps').textContent=Math.round(n);
+  const opts=line==='O'
+    ?[{name:'오리지널 정품',p:num('pOG')},{name:'브랜드 호환',p:num('pOC')},{name:'대용량 호환',p:num('pOB')}]
+    :[{name:'버츄오 에스프레소',p:num('pVE'),note:'물을 더해 아메리카노로'},{name:'버츄오 머그',p:num('pVM'),note:'머그 크기 한 잔'}];
+  opts.forEach(o=>o.m=o.p*n);
+  const min=opts.reduce((a,b)=>a.m<=b.m?a:b), max=Math.max(...opts.map(o=>o.m),1);
+  $('opts').innerHTML=opts.map(o=>`
+    <div class="opt${o===min?' pick':''}">
+      <div class="name">${o.name}${o===min?'<span class="badge">최저</span>':''}<small>1개 ${won(o.p)}${o.note?' · '+o.note:''}</small></div>
+      <div class="won">${won(o.m)}<span class="per">한 달 · 1년 ${won(o.m*12)}</span></div>
+      <div class="bar"><i style="width:${(o.m/max*100).toFixed(1)}%"></i></div>
+    </div>`).join('');
+
+  let t;
+  if(cups<=0){t='하루 잔수를 입력해주세요.';}
+  else if(line==='O'){
+    const g=opts[0], c=opts[1], b=opts[2];
+    t=`정품 대신 브랜드 호환을 쓰면 한 달 ${won(Math.max(0,g.m-c.m))}, 대용량 호환이면 <b>한 달 ${won(Math.max(0,g.m-b.m))} 아껴요.</b>`+
+      (milk?'<br>라떼라면 바리스타 라인이나 다크 로스트처럼 진한 캡슐이 우유에 덜 묻혀요.':'<br>처음엔 소량을 사서 내 머신에서 잘 추출되는지 먼저 확인하세요.');
+  } else {
+    t=`버츄오는 호환 캡슐이 적어 정품 위주예요.<br><b>머그 캡슐 대신 에스프레소 캡슐에 물을 더하면 한 달 ${won(Math.max(0,opts[1].m-opts[0].m))} 아껴요.</b>`;
+  }
+  $('tip').innerHTML=t;
+
+  // 캡슐 추천 정렬
+  const box=$('caps'); const cards=[...box.querySelectorAll('.cap')];
+  const score=el=>{
+    if(el.dataset.line!==line) return -99;
+    let s=0; const ct=el.dataset.t;
+    if(ct===taste) s+=3;
+    if(milk&&ct==='M') s+=5;
+    if(milk&&ct==='B') s+=1;
+    if(!milk&&ct==='M') s-=2;
+    if(el.dataset.decaf) s-=1;
+    if(ct==='X') s+=0.5;
+    return s;
+  };
+  cards.sort((a,b)=>score(b)-score(a));
+  cards.forEach((el,i)=>{box.appendChild(el);el.classList.toggle('hide',el.dataset.line!==line);el.classList.toggle('top',i===0);});
+}
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
+calc();
+</script>
