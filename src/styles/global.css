@@ -78,7 +78,7 @@ tr.cur td{background:var(--crema)}
 .band h2{margin-bottom:6px}
 .band p{margin:0 0 20px;color:var(--body)}
 .band .grid{border:0;padding:0;margin:0}
-.agree{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin:16px 0}
+.agree{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--body);margin:16px 0}
 .agree input{margin-top:3px;accent-color:var(--espresso)}
 .btn{width:100%;font:inherit;font-weight:700;font-size:16px;padding:15px;border:0;border-radius:8px;background:var(--espresso);color:#fff;cursor:pointer}
 .btn:hover{background:var(--roast)}
