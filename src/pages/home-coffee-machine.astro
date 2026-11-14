@@ -1,11 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
 ---
-<Base title="가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교" description="하루 잔수, 메뉴, 예산만 넣으면 캡슐·전자동·반자동·핸드드립 중 우리 집에 맞는 커피머신과 3년 총비용, 카페 대비 회수 기간을 알려드려요." path="/home-coffee-machine/">
+<Base title="가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교" description="하루 잔수, 메뉴, 예산만 넣으면 캡슐·전자동·반자동·핸드드립 중 우리 집에 맞는 커피머신과 3년 총비용, 카페 대비 회수 기간을 알려드려요." path="/home-coffee-machine/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.">
+  <PageHero slot="hero" eyebrow="커피머신 계산기" title="가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교" img="/img/band-machine.webp" imgM="/img/band-machine-m.webp" />
 
-  <p class="disclose">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.</p>
 
-  <h1>가정용 커피머신 추천: 캡슐·전자동·반자동 비용 비교</h1>
   <p class="lead">커피머신 추천, 가격만 보면 헷갈려요. 하루 몇 잔, 무슨 메뉴를 마시는지 넣으면 머신값과 1잔 값을 합친 3년 총비용으로 캡슐·전자동·반자동·핸드드립을 비교해드려요.</p>
 
   <section aria-label="마시는 습관 입력">
@@ -103,13 +104,7 @@ import Base from '../layouts/Base.astro';
     </dl>
   </section>
 
-  <section class="sec" aria-labelledby="rel-h">
-    <h2 id="rel-h">같이 쓰면 좋은 계산기</h2>
-    <div class="rel">
-      <a href="/coffee-beans-1kg/"><b>원두 1kg 몇 잔?</b><span>머신을 샀다면, 원두는 몇 g짜리를 사야 신선할 때 다 마실까요</span></a>
-      <a href="/office-coffee-cost/"><b>사무실 커피 비용</b><span>회사에 둘 머신이라면 인원수로 렌탈·캡슐·카페 월 비용을 비교해요</span></a>
-    </div>
-  </section>
+  <RelatedTools current="/home-coffee-machine/" />
 
   <div class="src">
     계산 기준 (2026년 11월 14일 확인)
@@ -121,6 +116,7 @@ import Base from '../layouts/Base.astro';
       <li>전기료, 세척용품, 고장 수리비는 넣지 않았어요.</li>
     </ul>
   </div>
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
 </Base>
 
 <style is:global>
@@ -144,10 +140,6 @@ import Base from '../layouts/Base.astro';
 table.cmp td,table.cmp th{text-align:left;vertical-align:top}
 table.cmp td{font-weight:400;color:var(--body)}
 table.cmp td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
-.rel{display:grid;gap:10px}
-.rel a{display:block;padding:16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body)}
-.rel a:hover{border-color:var(--espresso)}
-.rel b{display:block;color:var(--ink);font-size:var(--s3)}
 </style>
 
 <script is:inline>

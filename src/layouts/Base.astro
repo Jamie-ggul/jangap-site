@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
-interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean }
-const { title, description, path, home = false, wide = false } = Astro.props;
+interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean; disclose?: string }
+const { title, description, path, home = false, wide = false, disclose } = Astro.props;
 const site = 'https://jangap.com';
 const canonical = new URL(path, site).href;
 const fullTitle = home ? title : `${title} | 잔값`;
@@ -36,6 +36,8 @@ const fullTitle = home ? title : `${title} | 잔값`;
       </nav>
     </div>
   </header>
+  {disclose && <p class="top-disc">{disclose}</p>}
+  <slot name="hero" />
   <main class={wide ? "wide" : "wrap"}>
     <slot />
   </main>

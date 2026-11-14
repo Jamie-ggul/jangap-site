@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
 ---
-<Base title="원두 1kg 몇 잔? 며칠 가는지 계산기" description="원두 1kg은 몇 잔, 며칠 갈까요? 하루 잔수만 넣으면 다 마시는 기간과 250g·500g·1kg 1잔 단가, 신선하게 마실 수 있는 구매 용량을 알려드려요." path="/coffee-beans-1kg/">
+<Base title="원두 1kg 몇 잔? 며칠 가는지 계산기" description="원두 1kg은 몇 잔, 며칠 갈까요? 하루 잔수만 넣으면 다 마시는 기간과 250g·500g·1kg 1잔 단가, 신선하게 마실 수 있는 구매 용량을 알려드려요." path="/coffee-beans-1kg/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.">
+  <PageHero slot="hero" eyebrow="원두 계산기" title="원두 1kg 몇 잔? 며칠 가는지 계산기" img="/img/band-beans.webp" imgM="/img/band-beans-m.webp" />
 
 
-  <p class="disclose">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.</p>
 
-  <h1>원두 1kg 몇 잔? 며칠 가는지 계산기</h1>
   <p class="lead">원두 1kg은 1잔 15g 기준 약 66잔입니다. 하루에 몇 잔 마시는지 넣으면 다 마시는 데 걸리는 날짜와, 신선할 때 다 마실 수 있는 구매 용량을 알려드려요.</p>
 
   <section aria-label="마시는 양 입력">
@@ -79,7 +80,7 @@ import Base from '../layouts/Base.astro';
     </dl>
   </section>
 
-  <a class="xlink" href="/office-coffee-cost/"><b>사무실 커피라면?</b> 인원수로 원두·캡슐·카페 월 비용을 비교하는 사무실 커피머신 렌탈 비용 계산기를 써보세요.</a>
+  <RelatedTools current="/coffee-beans-1kg/" />
 
   <div class="src">
     계산 기준 (2026년 11월 14일 확인)
@@ -91,6 +92,7 @@ import Base from '../layouts/Base.astro';
       <li>에스프레소 1샷 원두 약 10g: <a href="https://www.kukinews.com/article/view/kuk202509150155">한국소비자단체협의회 조사(쿠키뉴스)</a></li>
     </ul>
   </div>
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
 </Base>
 <style is:global>
 .rows .opt.over .name small{color:#A35A1F}
@@ -117,9 +119,6 @@ import Base from '../layouts/Base.astro';
 .shop .go{font-size:var(--s1);font-weight:700;color:var(--espresso);white-space:nowrap}
 .buy-note{font-size:var(--s1);color:var(--body);margin:10px 0 0}
 @media (max-width:520px){.shop .item{grid-template-columns:52px 1fr}.shop .go{grid-column:2}}
-.xlink{display:block;margin:20px 0 0;padding:16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body)}
-.xlink b{color:var(--espresso)}
-.xlink:hover{border-color:var(--espresso)}
 </style>
 <script is:inline>
 const $=id=>document.getElementById(id);

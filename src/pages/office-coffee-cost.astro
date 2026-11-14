@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
 ---
-<Base title="사무실 커피머신 렌탈 비용 계산기" description="사무실 커피머신 렌탈 비용을 인원수로 계산해보세요. 원두+머신 렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 한 번에 비교합니다." path="/office-coffee-cost/">
+<Base title="사무실 커피머신 렌탈 비용 계산기" description="사무실 커피머신 렌탈 비용을 인원수로 계산해보세요. 원두+머신 렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 한 번에 비교합니다." path="/office-coffee-cost/" disclose="이 페이지 운영자는 서울 지역 사무실 원두 구독(머신 렌탈·관리 포함) 서비스를 준비 중입니다. 계산 결과는 시장 평균 단가 기준이며, 특정 업체에 유리하게 조정하지 않았습니다.">
+  <PageHero slot="hero" eyebrow="사무실 커피 계산기" title="사무실 커피머신 렌탈 비용 계산기" img="/img/band-office.webp" imgM="/img/band-office-m.webp" />
 
 
-  <p class="disclose">이 페이지 운영자는 서울 지역 사무실 원두 구독(머신 렌탈·관리 포함) 서비스를 준비 중입니다. 계산 결과는 시장 평균 단가 기준이며, 특정 업체에 유리하게 조정하지 않았습니다.</p>
 
-  <h1>사무실 커피머신 렌탈 비용 계산기</h1>
   <p class="lead">사무실 커피머신 렌탈 비용, 인원수만 넣으면 바로 나와요. 원두+머신 렌탈, 캡슐 머신, 카페 법인카드 세 가지 방식의 월 비용과 1잔 단가를 비교해보세요.</p>
 
   <section aria-label="사무실 정보 입력">
@@ -87,6 +88,8 @@ import Base from '../layouts/Base.astro';
     </dl>
   </section>
 
+  <RelatedTools current="/office-coffee-cost/" />
+
   <div class="src">
     계산 기준 (2026년 11월 확인, 시장 평균값이며 업체·제품마다 다릅니다)
     <ul>
@@ -95,6 +98,7 @@ import Base from '../layouts/Base.astro';
       <li>저가 프랜차이즈 아메리카노 1,400~1,800원(2026년 7~8월 인상 기준): <a href="https://biz.sbs.co.kr/amp/article/20000325123">SBS Biz</a></li>
     </ul>
   </div>
+  <p slot="credit">상단 사진: Andrijana Bozic / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
 </Base>
 <script is:inline>
 const $=id=>document.getElementById(id);
