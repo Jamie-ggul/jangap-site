@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
-interface Props { title: string; description: string; path: string; home?: boolean }
-const { title, description, path, home = false } = Astro.props;
+interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean }
+const { title, description, path, home = false, wide = false } = Astro.props;
 const site = 'https://jangap.com';
 const canonical = new URL(path, site).href;
 const fullTitle = home ? title : `${title} | 잔값`;
@@ -26,17 +26,17 @@ const fullTitle = home ? title : `${title} | 잔값`;
   <meta name="theme-color" content="#FFFFFF">
   <meta name="naver-site-verification" content="a395434ff200d2927fec6e0ec8528ff2b5249ce9" />
 </head>
-<body>
+<body class={wide ? "is-wide" : undefined}>
   <header class="site-header">
     <div class="in">
       <a class="wordmark" href="/" aria-label="잔값 홈">잔<span>값</span></a>
       <nav class="site-nav" aria-label="주요 메뉴">
-        <a href="/">도구</a>
+        <a href="/#tools">계산기</a>
         <a href="/about/">소개</a>
       </nav>
     </div>
   </header>
-  <main class="wrap">
+  <main class={wide ? "wide" : "wrap"}>
     <slot />
   </main>
   <footer class="site-footer">
@@ -47,6 +47,7 @@ const fullTitle = home ? title : `${title} | 잔값`;
         <a href="/privacy/">개인정보처리방침</a>
       </nav>
       <p>잔값은 커피 한 잔에 드는 비용을 계산하고 비교하는 도구 모음입니다. 가격은 확인 시점 기준이며 판매처마다 다를 수 있습니다.</p>
+      <slot name="credit" />
       <p>© 2026 잔값</p>
     </div>
   </footer>

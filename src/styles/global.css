@@ -128,3 +128,9 @@ ol.check li b{color:var(--ink)}
 .tools a:hover b{color:var(--espresso)}
 .tools li.soon a{pointer-events:none}
 .tools li.soon b{color:var(--muted)}
+
+/* 넓은 페이지(홈) */
+.wide{display:block}
+.is-wide .site-header .in,.is-wide .site-footer .in{max-width:1120px;padding-left:24px;padding-right:24px}
+.is-wide .site-footer{margin-top:0;background:var(--band);border-top:0}
+.is-wide .site-footer .in{color:var(--body)}

@@ -1,17 +1,207 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="잔값 | 커피 한 잔 비용 계산기" description="커피 한 잔에 얼마가 드는지 계산해요. 원두 1kg이 며칠 가는지, 사무실 커피머신 렌탈과 캡슐·카페 비용 비교까지 숫자로 확인하세요." path="/" home>
-  <h1 class="sentence" style="margin:12px 0 14px">커피 한 잔, 얼마에 마시고 있나요?</h1>
-  <p class="lead">잔값은 원두, 머신, 캡슐, 카페까지 커피 한 잔에 드는 비용을 계산하고 비교하는 도구 모음이에요. 숫자 몇 개만 넣으면 우리 집, 우리 사무실 기준으로 답이 나와요.</p>
+<Base title="잔값 | 커피 한 잔 비용 계산기" description="원두 1kg은 몇 잔, 며칠 갈까요? 원두 용량별 1잔 단가, 사무실 커피머신 렌탈과 캡슐·카페 비용 비교까지 커피 한 잔 값을 숫자로 계산해요." path="/" home wide>
+  <p class="h-disc">이 사이트는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 
-  <section class="sec" aria-labelledby="tools-h" style="margin-top:36px">
-    <h2 id="tools-h">계산기</h2>
-    <ul class="tools">
-      <li><a href="/coffee-beans-1kg/"><b>원두 1kg 몇 잔? 며칠 가는지 계산기</b><span>하루 잔수로 다 마시는 기간과 200g·500g·1kg 중 맞는 용량을 알려드려요.</span></a></li>
-      <li><a href="/office-coffee-cost/"><b>사무실 커피머신 렌탈 비용 계산기</b><span>인원수로 원두+렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 비교해요.</span></a></li>
-      <li class="soon"><a href="#" tabindex="-1" aria-disabled="true"><b>가정용 커피머신 고르기 (준비 중)</b><span>예산과 하루 잔수로 캡슐·반자동·전자동 중 맞는 방식을 골라드려요.</span></a></li>
-      <li class="soon"><a href="#" tabindex="-1" aria-disabled="true"><b>네스프레소 캡슐 고르기 (준비 중)</b><span>강도와 맛, 1잔 단가로 캡슐을 비교해요.</span></a></li>
-    </ul>
+  <section class="hero" aria-labelledby="hero-h">
+    <picture class="hero-ph">
+      <source media="(max-width: 720px)" srcset="/img/hero-tall.webp" width="900" height="1350">
+      <img src="/img/hero-wide.webp" width="1717" height="908" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero-in">
+      <p class="eyebrow">커피 사기 전에, 한 잔 값부터</p>
+      <h1 id="hero-h" class="big">원두 1kg은<br><em id="hCount">66</em>잔이에요.<br>하루 <span id="hCups">2</span>잔이면 <em id="hDays">33</em>일 가요.</h1>
+      <div class="ask">
+        <span>하루에 몇 잔 드세요?</span>
+        <div class="pills" role="group" aria-label="하루 잔수">
+          <button type="button" data-c="1" aria-pressed="false">1잔</button>
+          <button type="button" data-c="2" aria-pressed="true">2잔</button>
+          <button type="button" data-c="3" aria-pressed="false">3잔</button>
+          <button type="button" data-c="4" aria-pressed="false">4잔</button>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="cta" href="/coffee-beans-1kg/">내 기준으로 계산하기
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <span class="note">1잔에 원두 15g 기준</span>
+      </div>
+    </div>
   </section>
+
+  <section class="dots-sec" aria-labelledby="dots-h">
+    <figure class="dots-card">
+      <div class="dots-top"><span id="dots-h">원두 1kg = 66잔</span><span class="cnt"><span id="dCount">66</span> / 66</span></div>
+      <div class="dots" id="dots" role="img" aria-label="원두 1kg으로 내릴 수 있는 66잔을 점으로 표시"></div>
+      <figcaption>진한 점 하나가 한 잔이에요. 하루 <span id="fCups">2</span>잔이면 <span id="fDays">33</span>일, 개봉 후 4주 안에 다 마시기엔 <span id="fVerdict">조금 길어요. 500g을 추천해요.</span></figcaption>
+    </figure>
+  </section>
+
+  <section id="tools" class="tools-sec" aria-labelledby="tools-h">
+    <div class="in">
+      <h2 id="tools-h">무엇을 계산할까요?</h2>
+      <p class="sub">문장 속 빈칸만 채우면 금액과 1잔 단가가 바로 나와요.</p>
+      <div class="tiles">
+        <a class="tile" href="/coffee-beans-1kg/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="6.5" ry="9" transform="rotate(30 12 12)"/><path d="M9 5.5c3 3 3 9 6 13"/></svg>
+          <b>원두 1kg 몇 잔?</b><span>며칠 가는지, 250g·500g·1kg 중 뭐가 맞는지</span><i>계산하기</i>
+        </a>
+        <a class="tile" href="/office-coffee-cost/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M10 21v-3h4v3"/></svg>
+          <b>사무실 커피 비용</b><span>인원수로 원두·캡슐·카페 월 비용 비교</span><i>계산하기</i>
+        </a>
+        <div class="tile soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v5H5zM7 8v9M17 8v13H5v-4"/><path d="M9.5 13h4v3a2 2 0 0 1-2 2 2 2 0 0 1-2-2z"/></svg>
+          <b>가정용 커피머신 고르기</b><span>하루 잔수와 예산으로 머신 유형 추천</span><i>준비 중</i>
+        </div>
+        <div class="tile soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M6 8l2 11h8l2-11M9 8V5h6v3"/></svg>
+          <b>네스프레소 캡슐 비교</b><span>정품과 호환 캡슐의 개당 가격</span><i>준비 중</i>
+        </div>
+        <div class="tile soon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>
+          <b>카페인 함량표</b><span>프랜차이즈 메뉴별 카페인, 하루 권장량 대비</span><i>준비 중</i>
+        </div>
+        <a class="tile ask-tile" href="/about/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <b>필요한 계산기가 있나요?</b><span>알려주시면 다음 도구로 만들어요</span><i>제안하기</i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="data-sec" aria-labelledby="data-h">
+    <div class="in">
+      <h2 id="data-h">용량별 1잔 단가</h2>
+      <p class="sub">곰곰 콜롬비아 블렌드 홀빈, 1잔 15g 기준 · 2026년 11월 14일 가격</p>
+      <div class="rows">
+        <div class="row"><div class="rt"><b>250g</b><strong>659원</strong></div><div class="track"><i style="width:100%"></i></div></div>
+        <div class="row"><div class="rt"><b>500g</b><strong>640원</strong></div><div class="track"><i style="width:97%"></i></div></div>
+        <div class="row best"><div class="rt"><b>1kg <span class="badge">가장 싸요</span></b><strong>450원</strong></div><div class="track"><i style="width:68%"></i></div></div>
+      </div>
+      <a class="more" href="/coffee-beans-1kg/">내 하루 잔수로 다시 계산하기</a>
+    </div>
+  </section>
+
+  <section class="why-sec" aria-labelledby="why-h">
+    <div class="in">
+      <h2 id="why-h">잔값은 이렇게 계산해요</h2>
+      <div class="why">
+        <div class="first"><b>문장으로 묻고, 숫자로 답해요</b><span>폼 대신 문장 속 빈칸을 채우면 금액, 1잔 단가, 결론 한 문장이 나와요.</span></div>
+        <div><b>단가의 출처를 밝혀요</b><span>기본 가격에는 확인 날짜와 출처를 적고, 모든 값은 직접 바꿀 수 있어요.</span></div>
+        <div><b>파는 상품과 상관없이 같은 기준</b><span>제휴 링크가 있어도 계산식은 바뀌지 않아요. 더 싼 방법이 있으면 그걸 알려드려요.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <p slot="credit">메인 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
 </Base>
+
+<style>
+  .h-disc{max-width:1120px;margin:0 auto;padding:6px 24px 8px;font-size:11.5px;line-height:1.5;color:var(--muted)}
+  .hero{position:relative;overflow:hidden;background:#1E140D;color:#fff}
+  .hero-ph,.hero-ph img{position:absolute;inset:0;width:100%;height:100%}
+  .hero-ph img{object-fit:cover;object-position:center}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,16,10,.88) 0%,rgba(24,16,10,.72) 42%,rgba(24,16,10,.05) 72%)}
+  .hero-in{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding:88px 24px 96px;display:flex;flex-direction:column;gap:28px;align-items:flex-start}
+  .hero-in>*{max-width:600px}
+  .eyebrow{margin:0;font-size:15px;font-weight:700;color:#E8C9A8}
+  .big{margin:0;font-size:52px;line-height:1.32;letter-spacing:-.045em;color:#fff}
+  .big em{font-style:normal;color:#E8C9A8;font-variant-numeric:tabular-nums}
+  .ask{display:flex;flex-direction:column;gap:10px}
+  .ask>span{font-size:13px;color:#E2D6CB}
+  .pills{display:flex;gap:8px;flex-wrap:wrap}
+  .pills button{min-height:44px;min-width:56px;padding:0 16px;border-radius:8px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .pills button[aria-pressed=true]{background:#fff;color:var(--roast);border-color:#fff}
+  .cta-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .cta{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:8px;background:#fff;color:var(--roast);text-decoration:none;font-weight:700}
+  .cta:hover{background:var(--crema)}
+  .note{font-size:13px;color:#E2D6CB}
+
+  .dots-sec{max-width:1120px;margin:0 auto;padding:40px 24px 8px}
+  .dots-card{margin:0;max-width:520px;padding:24px;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:16px}
+  .dots-top{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
+  .dots-top .cnt{font-weight:400;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .dots{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:8px}
+  .dots :global(span){display:block;aspect-ratio:1;border-radius:50%;background:var(--hair);transition:background .2s}
+  .dots :global(span.on){background:var(--espresso)}
+  .dots-card figcaption{font-size:13px;line-height:1.55;color:var(--body)}
+
+  .in{max-width:1120px;margin:0 auto;padding:72px 24px}
+  .in h2{font-size:30px;letter-spacing:-.03em;margin:0 0 8px}
+  .sub{margin:0 0 28px;color:var(--body)}
+  .tools-sec{background:var(--band);margin-top:48px}
+  .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .tile{display:flex;flex-direction:column;gap:10px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);min-height:176px}
+  a.tile:hover{border-color:var(--espresso)}
+  .tile svg{width:32px;height:32px;fill:none;stroke:var(--espresso);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:4px}
+  .tile b{font-size:17px}
+  .tile span{color:var(--body);line-height:1.6}
+  .tile i{margin-top:auto;font-style:normal;font-size:13px;font-weight:700;color:var(--espresso)}
+  .tile.soon i{font-weight:400;color:var(--body)}
+  .ask-tile{background:transparent;border-style:dashed;border-color:var(--bar)}
+  .ask-tile svg{stroke:var(--body)}
+
+  .data-sec .in{max-width:760px;margin:0 auto}
+  .row{padding:16px 0;border-top:1px solid var(--hair)}
+  .row:last-child{border-bottom:1px solid var(--hair)}
+  .rt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .rt b{font-size:17px;display:flex;align-items:center;gap:8px}
+  .rt strong{font-size:22px;font-variant-numeric:tabular-nums}
+  .best strong{color:var(--espresso)}
+  .rt .badge{margin:0;vertical-align:0}
+  .track{height:6px;background:var(--mist);border-radius:3px}
+  .track i{display:block;height:6px;background:var(--bar);border-radius:3px}
+  .best .track i{background:var(--espresso)}
+  .more{display:inline-block;margin-top:20px;font-weight:700;color:var(--espresso)}
+
+  .why-sec{background:var(--roast);color:#fff}
+  .why-sec h2{color:#fff;margin-bottom:28px}
+  .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+  .why div{display:flex;flex-direction:column;gap:8px;padding-top:16px;border-top:1px solid #7A6352}
+  .why div.first{border-top:2px solid var(--crema)}
+  .why b{font-size:17px}
+  .why span{color:#E9DFD6;line-height:1.65}
+
+  @media (max-width:720px){
+    .h-disc{padding:6px 20px 8px}
+    .hero::after{background:linear-gradient(180deg,rgba(20,13,8,.90) 0%,rgba(20,13,8,.82) 55%,rgba(20,13,8,.72) 100%)}
+    .hero-ph img{object-position:30% 52%}
+    .hero-in{padding:36px 20px 40px;gap:24px}
+    .big{font-size:34px}
+    .dots-sec{padding:32px 20px 8px}
+    .dots-card{padding:20px}
+    .in{padding:48px 20px}
+    .in h2{font-size:24px}
+    .tools-sec{margin-top:40px}
+    .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .tile{padding:18px;min-height:148px}
+    .tile span{font-size:13px;line-height:1.5}
+    .why{grid-template-columns:1fr;gap:24px}
+  }
+</style>
+
+<script is:inline>
+(function(){
+  var dots=document.getElementById('dots');
+  for(var i=0;i<66;i++){var s=document.createElement('span');dots.appendChild(s);}
+  var spans=dots.children;
+  function paint(n){
+    document.getElementById('hCount').textContent=n;
+    document.getElementById('dCount').textContent=n;
+    for(var i=0;i<66;i++) spans[i].classList.toggle('on',i<n);
+  }
+  function setCups(c){
+    var d=Math.round(1000/(c*15));
+    ['hCups','fCups'].forEach(function(id){document.getElementById(id).textContent=c;});
+    ['hDays','fDays'].forEach(function(id){document.getElementById(id).textContent=d;});
+    document.getElementById('fVerdict').textContent=d<=28?'딱 맞아요.':'조금 길어요. 500g을 추천해요.';
+    document.querySelectorAll('.pills button').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.c===c));});
+  }
+  document.querySelectorAll('.pills button').forEach(function(b){b.addEventListener('click',function(){setCups(+b.dataset.c);});});
+  setCups(2);
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){paint(66);return;}
+  var n=0;paint(0);
+  var t=setInterval(function(){n=Math.min(66,n+2);paint(n);if(n>=66)clearInterval(t);},28);
+})();
+</script>
