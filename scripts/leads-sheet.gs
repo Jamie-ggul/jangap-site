@@ -1,14 +1,15 @@
-// 잔값 리드 시트 — Google Apps Script (시트의 확장 프로그램 > Apps Script에 붙여넣기)
+// 잔값 리드 시트 — Google Apps Script (ggulworks 계정의 독립 프로젝트 '잔값 리드 수집')
 // jangap.com /api/lead 가 견적 요청을 받을 때마다 POST로 한 줄씩 추가한다.
 // 처음 한 번: setup 실행(권한 승인) → 웹 앱으로 배포(실행: 나, 액세스: 모든 사용자)
 // → 배포 URL과 실행 로그의 토큰을 Vercel 환경변수 LEADS_SHEET_URL / LEADS_SHEET_TOKEN 에 입력.
 
+const SHEET_ID = '1-KgNvrmsLPvU3QkND2iwDOnGfbPpAqKGw-RIi2DVAig'; // 스프레드시트 '잔값 견적 리드'
 const SHEET = '리드';
 const HEAD = ['접수일시', '회사명', '담당자', '연락처', '이메일', '지역', '인원', '커피머신', '계산기 입력', '요청사항', '상태', '메모'];
 const KEYS = ['company', 'name', 'phone', 'email', 'area', 'people', 'machine', 'calc', 'memo'];
 
 function sheet_() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   let sh = ss.getSheetByName(SHEET);
   if (!sh) sh = ss.insertSheet(SHEET);
   if (sh.getLastRow() === 0) {
