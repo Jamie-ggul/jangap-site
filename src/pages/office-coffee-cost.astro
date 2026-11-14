@@ -51,19 +51,29 @@ import RelatedTools from '../components/RelatedTools.astro';
 
   <section class="band" aria-labelledby="lead-h">
     <h2 id="lead-h">우리 사무실 원두 구독 견적 받기</h2>
-    <p>서울 지역 사무실 대상. 인원과 머신 보유 여부를 남겨주시면 원두·머신 렌탈·관리 포함 견적을 보내드려요.</p>
+    <p>서울 지역 사무실 대상. 연락처만 남겨도 돼요. 인원과 머신 보유 여부를 알려주시면 원두·머신 렌탈·관리 포함 견적을 보내드려요.</p>
     <form id="leadForm" novalidate>
       <div class="grid">
-        <div><label for="fCompany">회사명</label><input id="fCompany" type="text" autocomplete="organization"></div>
+        <div><label for="fCompany">회사명</label><input id="fCompany" name="company" type="text" autocomplete="organization" maxlength="80"></div>
         <div><label for="fArea">지역</label>
-          <select id="fArea"><option>서울 강남·서초</option><option>서울 마포·영등포</option><option>서울 종로·중구</option><option>서울 성동·광진</option><option>서울 기타</option><option>서울 외 지역</option></select></div>
-        <div><label for="fPeople">인원</label><input id="fPeople" type="number" min="1" inputmode="numeric"></div>
-        <div><label for="fPhone">연락처</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
+          <select id="fArea" name="area"><option>서울 강남·서초</option><option>서울 마포·영등포</option><option>서울 종로·중구</option><option>서울 성동·광진</option><option>서울 기타</option><option>서울 외 지역</option></select></div>
+        <div><label for="fPeople">인원</label><input id="fPeople" name="people" type="number" min="1" inputmode="numeric"></div>
+        <div><label for="fMachine">커피머신</label>
+          <select id="fMachine" name="machine"><option>없음</option><option>있음</option><option>잘 모르겠음</option></select></div>
+        <div><label for="fName">담당자 <span class="lbl-opt">(선택)</span></label><input id="fName" name="name" type="text" autocomplete="name" maxlength="40"></div>
+        <div><label for="fPhone">연락처 <span class="req">*</span></label><input id="fPhone" name="phone" type="tel" autocomplete="tel" placeholder="010-0000-0000" required maxlength="30"></div>
+        <div class="full"><label for="fEmail">이메일 <span class="lbl-opt">(선택, 견적서를 메일로 받고 싶다면)</span></label><input id="fEmail" name="email" type="email" autocomplete="email" maxlength="120"></div>
+        <div class="full"><label for="fMemo">요청사항 <span class="lbl-opt">(선택)</span></label><textarea id="fMemo" name="memo" rows="3" maxlength="1000" placeholder="원하는 원두 맛, 시작 희망 시기 등"></textarea></div>
       </div>
-      <label class="agree"><input type="checkbox" id="fAgree"> 견적 안내를 위한 개인정보(회사명·연락처) 수집·이용에 동의합니다. 수집 정보는 견적 안내 후 1년간 보관합니다.</label>
-      <button class="btn" type="submit">견적 요청하기</button>
+      <div class="hp" aria-hidden="true"><label for="fWebsite">웹사이트</label><input id="fWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <label class="agree"><input type="checkbox" id="fAgree"> 견적 안내를 위한 개인정보(회사명·담당자·연락처·이메일) 수집·이용에 동의합니다. 수집 정보는 견적 안내 후 1년간 보관합니다.</label>
+      <button class="btn" type="submit" id="fSubmit">견적 요청하기</button>
       <div class="formmsg" id="formMsg" role="status"></div>
     </form>
+    <div class="done" id="leadDone" hidden>
+      <p class="done-t">견적 요청이 접수됐어요.</p>
+      <p>영업일 기준 1~2일 안에 남겨주신 연락처로 연락드릴게요. 급한 문의는 <a href="mailto:contact@jangap.com">contact@jangap.com</a>으로 보내주세요.</p>
+    </div>
   </section>
 
   <section class="sec" aria-labelledby="chk-h">
@@ -148,13 +158,30 @@ function calc(){
 document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
 calc();
 
-$('leadForm').addEventListener('submit',e=>{
+$('leadForm').addEventListener('submit',async e=>{
   e.preventDefault();
-  const m=$('formMsg'); m.style.display='block';
-  if(!$('fPhone').value.trim()){m.textContent='연락처를 입력해주세요.';return}
+  const m=$('formMsg'), btn=$('fSubmit'); m.style.display='block';
+  const phone=$('fPhone').value.trim(), email=$('fEmail').value.trim();
+  if(!/^[0-9+\-() ]{8,20}$/.test(phone)){m.textContent='연락처를 숫자로 정확히 입력해주세요.';$('fPhone').focus();return}
+  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.textContent='이메일 형식을 확인해주세요.';$('fEmail').focus();return}
   if(!$('fAgree').checked){m.textContent='개인정보 수집·이용에 동의해주세요.';return}
-  const body=['회사명: '+$('fCompany').value,'지역: '+$('fArea').value,'인원: '+($('fPeople').value||$('fPeople').placeholder),'연락처: '+$('fPhone').value,'','(개인정보 수집·이용에 동의함)'].join('\n');
-  location.href='mailto:contact@jangap.com?subject='+encodeURIComponent('[잔값] 사무실 원두 구독 견적 요청')+'&body='+encodeURIComponent(body);
-  m.textContent='메일 앱이 열리면 내용 확인 후 보내기를 눌러주세요. 열리지 않으면 contact@jangap.com으로 위 내용을 보내주세요.';
+  const data={company:$('fCompany').value,area:$('fArea').value,people:$('fPeople').value||String(parseInt($('fPeople').placeholder)||''),machine:$('fMachine').value,name:$('fName').value,phone,email,memo:$('fMemo').value,website:$('fWebsite').value,agree:true,
+    calc:`인원 ${$('people').value}명 · 1인 하루 ${$('cups').value}잔 · 월 ${$('days').value}일`};
+  btn.disabled=true; btn.textContent='보내는 중…'; m.textContent='';m.style.display='none';
+  try{
+    const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    const j=await r.json().catch(()=>({}));
+    if(r.ok&&j.ok){$('leadForm').hidden=true;$('leadDone').hidden=false;$('leadDone').scrollIntoView({block:'center',behavior:'smooth'});return}
+    if(j.error==='config'||r.status===404){ // 접수 서버 미설정 시 기존 메일 앱 방식으로
+      const body=['회사명: '+data.company,'지역: '+data.area,'인원: '+data.people,'커피머신: '+data.machine,'담당자: '+data.name,'연락처: '+data.phone,'이메일: '+data.email,'요청사항: '+data.memo,'계산기: '+data.calc,'','(개인정보 수집·이용에 동의함)'].join('\n');
+      location.href='mailto:contact@jangap.com?subject='+encodeURIComponent('[잔값] 사무실 원두 구독 견적 요청')+'&body='+encodeURIComponent(body);
+      btn.disabled=false; btn.textContent='견적 요청하기'; m.style.display='block';
+      m.textContent='메일 앱이 열리면 내용 확인 후 보내기를 눌러주세요.'; return;
+    }
+    throw new Error(j.error||r.status);
+  }catch(err){
+    btn.disabled=false; btn.textContent='견적 요청하기'; m.style.display='block';
+    m.innerHTML='접수 중 문제가 생겼어요. 잠시 후 다시 시도하거나 <a href="mailto:contact@jangap.com">contact@jangap.com</a>으로 연락처를 보내주세요.';
+  }
 });
 </script>

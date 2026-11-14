@@ -42,7 +42,7 @@ details.adv[open] summary svg{transform:rotate(180deg)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:8px}
 @media (min-width:720px){.grid.g3{grid-template-columns:repeat(3,1fr)}}
 label{display:block;font-size:var(--s1);color:var(--muted);margin-bottom:6px}
-input[type=number],input[type=text],input[type=tel],select{width:100%;font:inherit;font-size:16px;color:var(--ink);padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;appearance:none;-webkit-appearance:none}
+input[type=number],input[type=text],input[type=tel],input[type=email],select{width:100%;font:inherit;font-size:16px;color:var(--ink);padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;appearance:none;-webkit-appearance:none}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236D7882'%3E%3Cpath d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:20px;padding-right:36px}
 .grid input:focus,.grid select:focus,.band input:focus,.band select:focus{outline:none;border-color:var(--espresso);box-shadow:0 0 0 1px var(--espresso)}
 
@@ -150,3 +150,14 @@ ol.check li b{color:var(--ink)}
 .add-item .nm{font-weight:700}
 .add-item .nm small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
 .add-item .pr{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.band textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;resize:vertical}
+.band textarea:focus{outline:none;border-color:var(--espresso);box-shadow:0 0 0 1px var(--espresso)}
+.band .grid .full{grid-column:1/-1}
+.band label .lbl-opt{font-weight:400;color:var(--muted)}
+.band label .req{color:var(--espresso)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.btn:disabled{opacity:.6;cursor:wait}
+.done{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+.done p{margin:0;color:var(--body)}
+.done .done-t{font-weight:700;font-size:var(--s3);color:var(--espresso);margin-bottom:6px}
