@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+const beans = [
+  { k: 'nutty', n: '알커피 베트남 로부스타 G1', d: '로부스타 · 쓴맛과 바디감이 강한 편', g: 1000, p: 11900, u: 'https://link.coupang.com/a/iFkH1XOG6e' },
+  { k: 'nutty', n: '헤일로빈 베트남 로부스타 블루드래곤 G1', d: '로부스타 · 홀빈', g: 1000, p: 12540, u: 'https://link.coupang.com/a/iFkIlBt7S0' },
+  { k: 'nutty', n: '맥널티커피 베트남 G1 싱글오리진', d: '베트남 G1 · 싱글오리진', g: 1000, p: 13900, u: 'https://link.coupang.com/a/iFkIDHgRVY' },
+  { k: 'nutty', n: '워너빈 카카오딥 블렌딩', d: '블렌드 · 업소용 홀빈', g: 1000, p: 15720, u: 'https://link.coupang.com/a/iFkIVVP1CD' },
+  { k: 'nutty', n: '딥스커피 브라질 몬테까르멜로', d: '브라질 싱글오리진', g: 1000, p: 27540, u: 'https://link.coupang.com/a/iFkKuuAZnE' },
+  { k: 'nutty', n: '더써드로스터스 아몬드초콜릿', d: '블렌드 · 산미 없는 고소한 맛', g: 1000, p: 28500, u: 'https://link.coupang.com/a/iFkMnkeBH2' },
+  { k: 'nutty', n: '수달리커피 너티초코 블렌드', d: '블렌드 · 고소한 너티초코', g: 1000, p: 29800, u: 'https://link.coupang.com/a/iFkKcHwCwC' },
+  { k: 'nutty', n: '곰곰 콜롬비아 블렌드', d: '블렌드 · 쿠팡 자체 브랜드', g: 1000, p: 29990, u: 'https://link.coupang.com/a/iE0R9r9DnE' },
+  { k: 'acid', n: '티타임 에티오피아 프리미엄 블렌드', d: '에티오피아 블렌드 · 산미', g: 1000, p: 21520, u: 'https://link.coupang.com/a/iFkPe1KXAa' },
+  { k: 'acid', n: '블랙빈스 에티오피아 예가체프 G4', d: '예가체프 · 산미', g: 1000, p: 27360, u: 'https://link.coupang.com/a/iFkK1zqP9M' },
+  { k: 'acid', n: '헬리빈 에티오피아 예가체프 G2', d: '예가체프 · 산미', g: 1000, p: 29620, u: 'https://link.coupang.com/a/iFkOfvhArc' },
+  { k: 'decaf', n: '더치앤빈 멕시코 디카페인', d: '디카페인 · 500g', g: 500, p: 16900, u: 'https://link.coupang.com/a/iFkEUyXOcS' },
+  { k: 'decaf', n: '일리 디카페인', d: '디카페인 · 250g', g: 250, p: 12440, u: 'https://link.coupang.com/a/iFkEBLJhRI' },
+  { k: 'decaf', n: '테라로사 슬리피캣 디카페인 블렌드', d: '디카페인 · 250g', g: 250, p: 27500, u: 'https://link.coupang.com/a/iFkFcFWFZ6' },
+];
+const won = (n: number) => Math.round(n).toLocaleString('ko-KR') + '원';
+---
+<Base title="원두 추천: 1kg 원두 1잔 단가 랭킹" description="쿠팡 인기 원두를 1잔(15g) 단가 순으로 비교했어요. 고소한 원두, 산미 원두, 디카페인 원두를 나눠 보고 내 1잔 원두 양으로 다시 계산해보세요." path="/coffee-bean-ranking/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 순위는 판매 상품과 관계없이 1잔 단가로만 정해요.">
+  <PageHero slot="hero" eyebrow="원두 랭킹" title="원두 추천: 1kg 원두 1잔 단가 랭킹" img="/img/band-beans.webp" imgM="/img/band-beans-m.webp" />
+
+  <p class="lead">원두 추천을 찾고 있다면, 맛 취향을 고르고 1잔 단가를 비교해보세요. 쿠팡에서 많이 팔리는 원두를 1잔(15g) 값으로 줄 세웠어요. 내 1잔 원두 양을 넣으면 다시 계산돼요.</p>
+
+  <section aria-label="랭킹 조건">
+    <p class="sentence">
+      <span class="seg" role="group" aria-label="맛 필터"><button type="button" data-k="all" aria-pressed="true">전체</button><button type="button" data-k="nutty" aria-pressed="false">고소·묵직</button><button type="button" data-k="acid" aria-pressed="false">산미</button><button type="button" data-k="decaf" aria-pressed="false">디카페인</button></span>
+      원두를 1잔에 <input class="fill" id="gram" type="number" min="5" max="30" value="15" inputmode="numeric" aria-label="1잔 원두(g)">g씩 써요.
+    </p>
+  </section>
+
+  <section class="result" aria-labelledby="rk-h" aria-live="polite">
+    <h2 id="rk-h">1잔 단가 순위</h2>
+    <ol class="rank" id="rank">
+      {beans.map(b => (
+        <li class="rk" data-k={b.k} data-g={b.g} data-p={b.p}>
+          <a href={b.u} target="_blank" rel="sponsored nofollow noopener">
+            <span class="no"></span>
+            <span class="nm">{b.n}<small>{b.d} · {b.g >= 1000 ? (b.g / 1000) + 'kg' : b.g + 'g'} {won(b.p)}</small></span>
+            <span class="cup"><b class="cv"></b><small>1잔</small></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <div class="insight">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
+      <span id="tip"></span>
+    </div>
+    <p class="note">가격은 2026년 11월 14일 쿠팡 판매가예요. 1잔 단가 = 판매가 ÷ 용량(g) × 1잔 원두(g). 배송비와 할인 쿠폰은 넣지 않았어요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <h2 id="how-h">원두 고르는 법</h2>
+    <ul class="tips">
+      <li><b>1잔 단가는 로부스타가 가장 싸요.</b> 베트남 G1 같은 로부스타는 쓴맛과 바디감이 강하고 카페인이 많은 편이라, 라떼나 진한 아이스 커피에 잘 맞아요.</li>
+      <li><b>산미가 싫다면 브라질·콜롬비아 블렌드.</b> 상품 설명에 "고소한", "초콜릿", "산미 없는"이 붙은 원두가 무난해요.</li>
+      <li><b>과일 향과 산미를 원하면 에티오피아.</b> 예가체프, 시다모 같은 이름이 붙은 원두예요. 핸드드립으로 내리면 향이 잘 살아요.</li>
+      <li><b>1kg이 싸도 다 마실 수 있는지 먼저.</b> 원두는 개봉 후 몇 주 안에 맛이 빠지기 시작해요. 하루 잔수로 며칠 가는지 <a href="/coffee-beans-1kg/">원두 1kg 계산기</a>에서 확인하세요.</li>
+    </ul>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>순위는 어떻게 정했나요?</dt>
+      <dd>쿠팡에서 "원두 1kg", "커피원두 추천", "산미 원두", "디카페인 원두"로 검색했을 때 랭킹 상위에 있는 상품을 모은 뒤, 판매가를 1잔(15g) 값으로 바꿔 싼 순서로 줄 세웠어요. 맛 평가는 넣지 않았어요.</dd></div>
+      <div><dt>디카페인은 왜 비싼가요?</dt>
+      <dd>카페인을 빼는 공정이 추가되고, 소용량(250~500g)으로 파는 경우가 많아서 1잔 단가가 올라가요.</dd></div>
+      <div><dt>홀빈과 분쇄 중 뭘 사야 하나요?</dt>
+      <dd>그라인더가 있다면 홀빈이 향이 오래가요. 그라인더가 없다면 분쇄 원두를 소량씩 사는 편이 나아요.</dd></div>
+    </dl>
+  </section>
+
+  <RelatedTools current="/coffee-bean-ranking/" />
+
+  <div class="src">
+    기준 (2026년 11월 14일 확인)
+    <ul>
+      <li>상품과 가격: 쿠팡 검색 결과 랭킹 상위 상품의 판매가.</li>
+      <li>맛 설명: 각 상품명·상품 설명에 적힌 표현과 원산지 기준이에요.</li>
+      <li>쿠팡 파트너스 API가 연결되면 매주 가격을 다시 확인해 순위를 갱신할 예정이에요.</li>
+    </ul>
+  </div>
+
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
+</Base>
+
+<style is:global>
+.seg button{min-height:40px}
+.sentence .seg{margin-bottom:14px}
+.rank{list-style:none;margin:0;padding:0}
+.rk a{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);text-decoration:none;color:var(--ink)}
+.rk:first-child a{border-top:1px solid var(--hair)}
+.rk a:hover .nm{color:var(--espresso)}
+.rk.hide{display:none}
+.rk .no{font-weight:700;color:var(--body);font-variant-numeric:tabular-nums}
+.rk .nm{font-weight:700;font-size:var(--s2)}
+.rk .nm small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
+.rk .cup{text-align:right}
+.rk .cup b{display:block;font-size:var(--s4);font-variant-numeric:tabular-nums}
+.rk .cup small{font-size:var(--s1);color:var(--body)}
+.rk.top a{background:var(--crema);margin:0 -10px;padding:14px 10px;border-radius:8px;border-color:transparent}
+.rk.top .no{color:var(--espresso)}
+.rk.top .cup b{color:var(--espresso)}
+.tips{list-style:none;padding:0;margin:0}
+.tips li{padding:14px 0;border-bottom:1px solid var(--hair);color:var(--body)}
+.tips li:first-child{border-top:1px solid var(--hair)}
+.tips li b{display:block;color:var(--ink);font-size:var(--s3);margin-bottom:2px}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+let key='all';
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{key=b.dataset.k;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));calc();});
+$('gram').addEventListener('input',calc);
+function calc(){
+  const g=Math.max(1,parseFloat($('gram').value)||15);
+  const list=$('rank'); const items=[...list.children];
+  items.forEach(li=>li.cup=li.dataset.p/li.dataset.g*g);
+  items.sort((a,b)=>a.cup-b.cup).forEach(li=>list.appendChild(li));
+  let i=0; const shown=[];
+  items.forEach(li=>{const on=key==='all'||li.dataset.k===key;li.classList.toggle('hide',!on);li.classList.remove('top');if(on){i++;li.querySelector('.no').textContent=i;li.querySelector('.cv').textContent=won(li.cup);shown.push(li);}});
+  if(shown[0]) shown[0].classList.add('top');
+  if(shown.length>1){
+    const lo=shown[0], hi=shown[shown.length-1], diff=hi.cup-lo.cup;
+    const name=lo.querySelector('.nm').firstChild.textContent.trim();
+    $('tip').innerHTML=`가장 싼 원두는 <b>${name}</b>, 1잔 ${won(lo.cup)}이에요.<br>목록에서 가장 비싼 원두와 1잔 ${won(diff)} 차이라, 하루 2잔이면 <b>한 달 ${won(diff*2*30.4)}</b> 차이 나요.`;
+  }
+}
+calc();
+</script>
