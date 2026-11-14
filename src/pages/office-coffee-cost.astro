@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 ---
-<Base title="사무실 커피머신 렌탈 비용 계산기" description="사무실 커피머신 렌탈 비용을 인원수로 계산해보세요. 원두+머신 렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 한 번에 비교합니다." path="/office-coffee-cost/" disclose="이 페이지 운영자는 서울 지역 사무실 원두 구독(머신 렌탈·관리 포함) 서비스를 준비 중입니다. 계산 결과는 시장 평균 단가 기준이며, 특정 업체에 유리하게 조정하지 않았습니다.">
+<Base ogImage="/img/og-office.jpg" title="사무실 커피머신 렌탈 비용 계산기" description="사무실 커피머신 렌탈 비용을 인원수로 계산해보세요. 원두+머신 렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 한 번에 비교합니다." path="/office-coffee-cost/" disclose="이 페이지 운영자는 서울 지역 사무실 원두 구독(머신 렌탈·관리 포함) 서비스를 준비 중입니다. 계산 결과는 시장 평균 단가 기준이며, 특정 업체에 유리하게 조정하지 않았습니다.">
   <PageHero slot="hero" eyebrow="사무실 커피 계산기" title="사무실 커피머신 렌탈 비용 계산기" img="/img/band-office.webp" imgM="/img/band-office-m.webp" />
 
 
@@ -79,6 +79,8 @@ import RelatedTools from '../components/RelatedTools.astro';
   <section class="sec" aria-labelledby="faq-h">
     <h2 id="faq-h">자주 묻는 질문</h2>
     <dl class="faq">
+      <div><dt>커피자판기 렌탈이나 커피 케이터링과는 뭐가 다른가요?</dt>
+      <dd>커피자판기 렌탈은 믹스·인스턴트 위주라 1잔 값이 싸지만 원두 커피를 원하는 사무실에는 잘 맞지 않아요. 커피 케이터링은 행사나 워크숍처럼 하루 단위로 바리스타가 오는 서비스라 매일 마시는 용도로는 비싸요. 매일 마시는 사무실 커피는 원두+커피머신 렌탈이나 캡슐 머신이 보통 1잔 값이 가장 합리적이에요.</dd></div>
       <div><dt>사무실 커피 1잔에 원두는 몇 g 들어가나요?</dt>
       <dd>아메리카노 기준 보통 10~15g입니다. 이 계산기는 넉넉하게 15g으로 잡았고, ‘단가 직접 바꾸기’에서 조정할 수 있어요.</dd></div>
       <div><dt>머신을 사는 게 렌탈보다 싼가요?</dt>

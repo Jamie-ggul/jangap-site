@@ -1,9 +1,10 @@
 ---
 import '../styles/global.css';
-interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean; disclose?: string }
-const { title, description, path, home = false, wide = false, disclose } = Astro.props;
+interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean; disclose?: string; ogImage?: string }
+const { title, description, path, home = false, wide = false, disclose, ogImage = '/img/og-home.jpg' } = Astro.props;
 const site = 'https://jangap.com';
 const canonical = new URL(path, site).href;
+const ogUrl = new URL(ogImage, site).href;
 const fullTitle = home ? title : `${title} | 잔값`;
 ---
 <!DOCTYPE html>
@@ -23,6 +24,10 @@ const fullTitle = home ? title : `${title} | 잔값`;
   <meta property="og:description" content={description}>
   <meta property="og:url" content={canonical}>
   <meta property="og:locale" content="ko_KR">
+  <meta property="og:image" content={ogUrl}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFFFFF">
   <meta name="naver-site-verification" content="a395434ff200d2927fec6e0ec8528ff2b5249ce9" />
 </head>
