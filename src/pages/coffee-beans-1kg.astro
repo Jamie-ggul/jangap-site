@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="원두 1kg 몇 잔? 며칠 가는지 계산기" description="원두 1kg은 몇 잔, 며칠 갈까요? 하루 잔수만 넣으면 다 마시는 기간과 200g·500g·1kg 1잔 단가, 신선하게 마실 수 있는 구매 용량을 알려드려요." path="/coffee-beans-1kg/">
+<Base title="원두 1kg 몇 잔? 며칠 가는지 계산기" description="원두 1kg은 몇 잔, 며칠 갈까요? 하루 잔수만 넣으면 다 마시는 기간과 250g·500g·1kg 1잔 단가, 신선하게 마실 수 있는 구매 용량을 알려드려요." path="/coffee-beans-1kg/">
 
 
-  <p class="disclose">이 페이지에는 추후 쿠팡 파트너스 링크가 들어갈 수 있으며, 링크를 통해 구매하면 운영자가 일정액의 수수료를 받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.</p>
+  <p class="disclose">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 계산 결과는 판매 상품과 관계없이 같은 기준으로 나옵니다.</p>
 
   <h1>원두 1kg 몇 잔? 며칠 가는지 계산기</h1>
   <p class="lead">원두 1kg은 1잔 15g 기준 약 66잔입니다. 하루에 몇 잔 마시는지 넣으면 다 마시는 데 걸리는 날짜와, 신선할 때 다 마실 수 있는 구매 용량을 알려드려요.</p>
@@ -20,9 +20,9 @@ import Base from '../layouts/Base.astro';
     <details class="adv">
       <summary>용량별 가격 바꾸기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></summary>
       <div class="grid g3">
-        <div><label for="p200">200g 가격 (원)</label><input id="p200" type="number" min="0" step="500" value="15000" inputmode="numeric"></div>
-        <div><label for="p500">500g 가격 (원)</label><input id="p500" type="number" min="0" step="500" value="24500" inputmode="numeric"></div>
-        <div><label for="p1000">1kg 가격 (원)</label><input id="p1000" type="number" min="0" step="500" value="36000" inputmode="numeric"></div>
+        <div><label for="p250">250g 가격 (원)</label><input id="p250" type="number" min="0" step="10" value="10990" inputmode="numeric"></div>
+        <div><label for="p500">500g 가격 (원)</label><input id="p500" type="number" min="0" step="10" value="21320" inputmode="numeric"></div>
+        <div><label for="p1000">1kg 가격 (원)</label><input id="p1000" type="number" min="0" step="10" value="29990" inputmode="numeric"></div>
       </div>
     </details>
   </section>
@@ -34,6 +34,17 @@ import Base from '../layouts/Base.astro';
       <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
       <span id="tip"></span>
     </div>
+  </section>
+
+  <section class="sec buy" aria-labelledby="buy-h">
+    <h2 id="buy-h">계산에 쓴 원두, 용량별로 보기</h2>
+    <p class="buy-lead">기본 가격은 같은 원두(곰곰 콜롬비아 블렌드, 홀빈)를 용량별로 비교한 값이에요. 위 결과에서 추천된 용량이 강조돼요.</p>
+    <div class="shop" id="shop">
+      <a class="item" data-g="250" href="https://link.coupang.com/a/iE0KWuCJDo" target="_blank" rel="sponsored nofollow noopener"><span class="sz">250g</span><span class="nm">곰곰 콜롬비아 블렌드 원두 250g × 1</span><span class="go">쿠팡에서 보기</span></a>
+      <a class="item" data-g="500" href="https://link.coupang.com/a/iE0QV3lhzE" target="_blank" rel="sponsored nofollow noopener"><span class="sz">500g</span><span class="nm">곰곰 콜롬비아 블렌드 원두 250g × 2</span><span class="go">쿠팡에서 보기</span></a>
+      <a class="item" data-g="1000" href="https://link.coupang.com/a/iE0R9r9DnE" target="_blank" rel="sponsored nofollow noopener"><span class="sz">1kg</span><span class="nm">곰곰 콜롬비아 블렌드 원두 1kg × 1</span><span class="go">쿠팡에서 보기</span></a>
+    </div>
+    <p class="buy-note">가격은 2026년 11월 14일 기준이며 수시로 바뀌어요. 실제 가격은 쿠팡에서 확인하세요.</p>
   </section>
 
   <section class="sec" aria-labelledby="life-h">
@@ -51,7 +62,7 @@ import Base from '../layouts/Base.astro';
     <ul class="tips">
       <li><b>밀폐하고, 빛과 열을 피해요.</b> 개봉한 원두는 공기를 최대한 뺀 밀폐 용기나 지퍼 봉투에 담아 서늘하고 어두운 곳에 둬요.</li>
       <li><b>냉장 보관은 피해요.</b> 꺼낼 때마다 습기가 맺히고 냉장고 냄새가 밸 수 있어요. 상온 밀폐가 더 나아요.</li>
-      <li><b>오래 둘 거라면 소분해서 냉동해요.</b> 1kg를 사서 한 번에 다 못 마신다면 1~2주 분량씩 나눠 냉동하고, 꺼낸 봉투는 상온에서 완전히 녹인 뒤 열어요.</li>
+      <li><b>오래 둘 거라면 소분해서 냉동해요.</b> 1kg을 사서 한 번에 다 못 마신다면 1~2주 분량씩 나눠 냉동하고, 꺼낸 봉투는 상온에서 완전히 녹인 뒤 열어요.</li>
       <li><b>분쇄는 마시기 직전에.</b> 갈아둔 원두는 공기에 닿는 면적이 넓어져 홀빈보다 훨씬 빨리 향이 빠져요.</li>
     </ul>
   </section>
@@ -71,9 +82,9 @@ import Base from '../layouts/Base.astro';
   <a class="xlink" href="/office-coffee-cost/"><b>사무실 커피라면?</b> 인원수로 원두·캡슐·카페 월 비용을 비교하는 사무실 커피머신 렌탈 비용 계산기를 써보세요.</a>
 
   <div class="src">
-    계산 기준 (2026년 11월 확인)
+    계산 기준 (2026년 11월 14일 확인)
     <ul>
-      <li>용량별 가격 기본값: 쿠팡에서 같은 블렌드를 200g·500g·1kg로 파는 한 판매자의 배송비 포함 가격(15,000원 / 24,500원 / 36,000원). 상품마다 다르니 직접 바꿔 넣으세요.</li>
+      <li>용량별 가격 기본값: 쿠팡 곰곰 콜롬비아 블렌드 홀빈 250g×1 · 250g×2 · 1kg×1 판매가(10,990원 / 21,320원 / 29,990원, 2026년 11월 14일 확인). 상품마다 다르니 직접 바꿔 넣으세요.</li>
       <li>로스팅 후 2주 안이 가장 맛있고 30일이 지나면 품질이 떨어짐: <a href="https://www.stumptowncoffee.com/blog/coffee-class-get-fresh">Stumptown Coffee</a>, <a href="https://www.breville.com/kr/ko/coffee-journey/inspiration/beans/why-is-coffee-freshness-important.html">Breville 코리아</a></li>
       <li>개봉 후 3~4주 안에 소비, 분쇄 원두는 7~14일: <a href="https://1zpresso.coffee/jp/how-long-do-coffee-beans-last/">1Zpresso</a></li>
       <li>질소 충전 1kg·500g 포장, 로스팅 후 최대 8주 유지(로스터 자체 테스트): <a href="https://www.sevenmiles.com.au/editorial/coffee-freshness/">Seven Miles</a></li>
@@ -95,6 +106,17 @@ import Base from '../layouts/Base.astro';
 .timeline span{display:block;font-size:var(--s1);color:var(--muted)}
 .timeline p{margin:6px 0 0;font-size:14px;color:var(--body)}
 @media (max-width:520px){.timeline{grid-template-columns:1fr}.timeline div{border-left:0;border-top:1px solid var(--line)}.timeline div:first-child{border-top:0}}
+.buy-lead{color:var(--body);margin:0 0 14px}
+.shop{display:grid;gap:10px}
+.shop .item{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body);background:var(--paper)}
+.shop .item:hover{border-color:var(--espresso)}
+.shop .item.pick{border-color:var(--espresso);background:var(--crema)}
+.shop .sz{font-weight:700;color:var(--ink);font-size:var(--s3)}
+.shop .item.pick .sz::after{content:"추천";display:block;font-size:var(--s1);color:var(--espresso)}
+.shop .nm{font-size:var(--s2)}
+.shop .go{font-size:var(--s1);font-weight:700;color:var(--espresso);white-space:nowrap}
+.buy-note{font-size:var(--s1);color:var(--body);margin:10px 0 0}
+@media (max-width:520px){.shop .item{grid-template-columns:52px 1fr}.shop .go{grid-column:2}}
 .xlink{display:block;margin:20px 0 0;padding:16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--body)}
 .xlink b{color:var(--espresso)}
 .xlink:hover{border-color:var(--espresso)}
@@ -103,7 +125,7 @@ import Base from '../layouts/Base.astro';
 const $=id=>document.getElementById(id);
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 const num=id=>Math.max(0,parseFloat($(id).value)||0);
-const SIZES=[{g:200,id:'p200',label:'200g'},{g:500,id:'p500',label:'500g'},{g:1000,id:'p1000',label:'1kg'}];
+const SIZES=[{g:250,id:'p250',label:'250g'},{g:500,id:'p500',label:'500g'},{g:1000,id:'p1000',label:'1kg'}];
 
 function calc(){
   const cups=num('cups'), gram=num('gram')||15, weeks=num('weeks')||4;
@@ -133,12 +155,13 @@ function calc(){
   let t;
   if(perDay<=0){t='하루 잔수를 입력해주세요.'}
   else if(pick===k){t=`1kg도 ${weeks}주 안에 다 마실 수 있어요.<br><b>1잔 ${won(k.perCup)}, 가장 싸게 마시는 용량이에요.</b>`}
-  else if(!pick.fits){t=`200g도 ${weeks}주 안에 다 마시기 어려워요.<br><b>200g씩 사고, 개봉한 봉투는 밀폐해서 빨리 드세요.</b>`}
+  else if(!pick.fits){t=`250g도 ${weeks}주 안에 다 마시기 어려워요.<br><b>250g씩 사고, 개봉한 봉투는 밀폐해서 빨리 드세요.</b>`}
   else{
     const save=(pick.perCup-k.perCup)*cups*30;
     t=`${weeks}주 안에 다 마시려면 ${pick.label}이 맞아요.<br><b>1kg으로 사서 ${pick.label}씩 소분 냉동하면 한 달 ${won(save)} 아낄 수 있어요.</b>`;
   }
   $('tip').innerHTML=t;
+  document.querySelectorAll('#shop .item').forEach(a=>a.classList.toggle('pick',perDay>0&&+a.dataset.g===pick.g));
 }
 document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
 calc();
