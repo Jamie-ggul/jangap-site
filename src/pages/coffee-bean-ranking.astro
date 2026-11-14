@@ -26,10 +26,8 @@ const won = (n: number) => Math.round(n).toLocaleString('ko-KR') + '원';
   <p class="lead">커피 원두 추천을 찾고 있다면, 맛 취향을 고르고 1잔 단가를 비교해보세요. 쿠팡에서 많이 팔리는 원두를 1잔(15g) 값으로 줄 세웠어요. 내 1잔 원두 양을 넣으면 다시 계산돼요.</p>
 
   <section aria-label="랭킹 조건">
-    <p class="sentence">
-      <span class="seg" role="group" aria-label="맛 필터"><button type="button" data-k="all" aria-pressed="true">전체</button><button type="button" data-k="nutty" aria-pressed="false">고소·묵직</button><button type="button" data-k="acid" aria-pressed="false">산미</button><button type="button" data-k="decaf" aria-pressed="false">디카페인</button></span>
-      원두를 1잔에 <input class="fill" id="gram" type="number" min="5" max="30" value="15" inputmode="numeric" aria-label="1잔 원두(g)">g씩 써요.
-    </p>
+    <div class="filters"><span class="seg" role="group" aria-label="맛 필터"><button type="button" data-k="all" aria-pressed="true">전체</button><button type="button" data-k="nutty" aria-pressed="false">고소·묵직</button><button type="button" data-k="acid" aria-pressed="false">산미</button><button type="button" data-k="decaf" aria-pressed="false">디카페인</button></span></div>
+    <p class="sentence">원두를 1잔에 <span class="nw"><input class="fill" id="gram" type="number" min="5" max="30" value="15" inputmode="numeric" aria-label="1잔 원두(g)">g씩</span> 써요.</p>
   </section>
 
   <section class="result" aria-labelledby="rk-h" aria-live="polite">
@@ -91,7 +89,7 @@ const won = (n: number) => Math.round(n).toLocaleString('ko-KR') + '원';
 
 <style is:global>
 .seg button{min-height:40px}
-.sentence .seg{margin-bottom:14px}
+.filters{margin-bottom:14px}
 .rank{list-style:none;margin:0;padding:0}
 .rk a{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);text-decoration:none;color:var(--ink)}
 .rk:first-child a{border-top:1px solid var(--hair)}

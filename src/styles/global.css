@@ -22,6 +22,7 @@ h1{font-size:var(--s4);line-height:1.35;margin:0 0 6px;font-weight:700;letter-sp
 
 /* 히어로: 문장형 계산기 */
 .sentence{font-size:var(--s5);font-weight:700;line-height:1.55;letter-spacing:-.04em;margin:0;color:var(--ink)}
+.nw{white-space:nowrap}
 .sentence .soft{color:var(--muted);font-weight:400}
 .sentence input.fill{font:inherit;font-size:inherit;color:var(--espresso);background:var(--crema);border:0;border-bottom:2px solid var(--espresso);border-radius:4px 4px 0 0;padding:0 .12em;margin:0 .06em;text-align:center;width:2.4em;display:inline-block;letter-spacing:-.02em;-moz-appearance:textfield;appearance:textfield}
 .sentence input.fill::-webkit-inner-spin-button,.sentence input.fill::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}

@@ -12,8 +12,8 @@ import RelatedTools from '../components/RelatedTools.astro';
 
   <section aria-label="마시는 양 입력">
     <p class="sentence">
-      하루 <input class="fill" id="cups" type="number" min="0.5" step="0.5" value="2" inputmode="decimal" aria-label="하루 잔수">잔,
-      1잔에 원두 <input class="fill" id="gram" type="number" min="5" max="30" value="15" inputmode="numeric" aria-label="1잔 원두 g">g을 써요.
+      하루 <span class="nw"><input class="fill" id="cups" type="number" min="0.5" step="0.5" value="2" inputmode="decimal" aria-label="하루 잔수">잔,</span>
+      1잔에 원두 <span class="nw"><input class="fill" id="gram" type="number" min="5" max="30" value="15" inputmode="numeric" aria-label="1잔 원두 g">g을</span> 써요.
       <span class="soft">개봉 후</span> <input class="fill" id="weeks" type="number" min="1" max="12" value="4" inputmode="numeric" aria-label="개봉 후 다 마실 주 수"><span class="soft">주 안에 마실래요.</span>
     </p>
     <p class="need">원두 1kg은 <b id="kgCups">-</b>잔, 하루 <span id="cupsEcho">-</span>잔이면 <b id="kgDays">-</b>일 가요.</p>

@@ -33,7 +33,7 @@ const fmt = (n: number) => (Number.isInteger(n) ? n : n.toFixed(1)).toLocaleStri
   <section aria-label="섭취 기준 선택">
     <p class="sentence">
       나는 <span class="seg" role="group" aria-label="섭취 기준"><button type="button" id="gA" aria-pressed="true">성인</button><button type="button" id="gP" aria-pressed="false">임산부</button><button type="button" id="gT" aria-pressed="false">청소년</button></span>
-      <span id="wWrap" hidden>, 몸무게 <input class="fill" id="weight" type="number" min="20" max="120" value="50" inputmode="numeric" aria-label="몸무게(kg)">kg</span><span id="sfx">이에요.</span>
+      <span id="wWrap" hidden>, 몸무게 <span class="nw"><input class="fill" id="weight" type="number" min="20" max="120" value="50" inputmode="numeric" aria-label="몸무게(kg)">kg</span></span><span id="sfx">이에요.</span>
     </p>
     <p class="need">하루 권고량은 <b id="limit">400</b>mg 이하예요.</p>
   </section>

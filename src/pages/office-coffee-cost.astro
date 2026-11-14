@@ -12,9 +12,9 @@ import RelatedTools from '../components/RelatedTools.astro';
 
   <section aria-label="사무실 정보 입력">
     <p class="sentence">
-      우리 사무실 <input class="fill" id="people" type="number" min="1" value="10" inputmode="numeric" aria-label="인원(명)">명이
-      하루 <input class="fill" id="cups" type="number" min="0" step="0.5" value="1.5" inputmode="decimal" aria-label="1인 하루 잔수">잔씩,
-      한 달 <input class="fill" id="days" type="number" min="1" max="31" value="21" inputmode="numeric" aria-label="월 근무일">일 마셔요.
+      우리 사무실 <span class="nw"><input class="fill" id="people" type="number" min="1" value="10" inputmode="numeric" aria-label="인원(명)">명이</span>
+      하루 <span class="nw"><input class="fill" id="cups" type="number" min="0" step="0.5" value="1.5" inputmode="decimal" aria-label="1인 하루 잔수">잔씩,</span>
+      한 달 <span class="nw"><input class="fill" id="days" type="number" min="1" max="31" value="21" inputmode="numeric" aria-label="월 근무일">일</span> 마셔요.
       <span class="soft">커피머신은</span>
       <span class="seg" role="group" aria-label="커피머신 보유 여부"><button type="button" id="ownNo" aria-pressed="true">없어요</button><button type="button" id="ownYes" aria-pressed="false">있어요</button></span>
     </p>
