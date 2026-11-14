@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jangap.com/sitemap-index.xml

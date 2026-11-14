@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string; path: string; home?: boolean }
+const { title, description, path, home = false } = Astro.props;
+const site = 'https://jangap.com';
+const canonical = new URL(path, site).href;
+const fullTitle = home ? title : `${title} | 잔값`;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <link rel="preload" href="/fonts/Pretendard-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Pretendard-Bold.subset.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="잔값">
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:locale" content="ko_KR">
+  <meta name="theme-color" content="#FFFFFF">
+</head>
+<body>
+  <header class="site-header">
+    <div class="in">
+      <a class="wordmark" href="/" aria-label="잔값 홈">잔<span>값</span></a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="/">도구</a>
+        <a href="/about/">소개</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <slot />
+  </main>
+  <footer class="site-footer">
+    <div class="in">
+      <nav aria-label="사이트 정보">
+        <a href="/about/">소개</a>
+        <a href="/about/#affiliate">제휴 고지</a>
+        <a href="/privacy/">개인정보처리방침</a>
+      </nav>
+      <p>잔값은 커피 한 잔에 드는 비용을 계산하고 비교하는 도구 모음입니다. 가격은 확인 시점 기준이며 판매처마다 다를 수 있습니다.</p>
+      <p>© 2026 잔값</p>
+    </div>
+  </footer>
+</body>
+</html>

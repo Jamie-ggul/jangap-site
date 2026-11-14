@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="사무실 커피머신 렌탈 비용 계산기" description="사무실 커피머신 렌탈 비용을 인원수로 계산해보세요. 원두+머신 렌탈, 캡슐, 카페 법인카드 월 비용과 1잔 단가를 한 번에 비교합니다." path="/office-coffee-cost/">
+
+
+  <p class="disclose">이 페이지 운영자는 서울 지역 사무실 원두 구독(머신 렌탈·관리 포함) 서비스를 준비 중입니다. 계산 결과는 시장 평균 단가 기준이며, 특정 업체에 유리하게 조정하지 않았습니다.</p>
+
+  <h1>사무실 커피머신 렌탈 비용 계산기</h1>
+  <p class="lead">사무실 커피머신 렌탈 비용, 인원수만 넣으면 바로 나와요. 원두+머신 렌탈, 캡슐 머신, 카페 법인카드 세 가지 방식의 월 비용과 1잔 단가를 비교해보세요.</p>
+
+  <section aria-label="사무실 정보 입력">
+    <p class="sentence">
+      우리 사무실 <input class="fill" id="people" type="number" min="1" value="10" inputmode="numeric" aria-label="인원(명)">명이
+      하루 <input class="fill" id="cups" type="number" min="0" step="0.5" value="1.5" inputmode="decimal" aria-label="1인 하루 잔수">잔씩,
+      한 달 <input class="fill" id="days" type="number" min="1" max="31" value="21" inputmode="numeric" aria-label="월 근무일">일 마셔요.
+      <span class="soft">커피머신은</span>
+      <span class="seg" role="group" aria-label="커피머신 보유 여부"><button type="button" id="ownNo" aria-pressed="true">없어요</button><button type="button" id="ownYes" aria-pressed="false">있어요</button></span>
+    </p>
+    <p class="need">한 달에 <b id="sCups">-</b>잔, 원두 <b id="sKg">-</b>kg이 필요해요.</p>
+
+    <details class="adv">
+      <summary>단가 직접 바꾸기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></summary>
+      <div class="grid g3">
+        <div><label for="gram">1잔 원두 (g)</label><input id="gram" type="number" min="5" max="30" value="15" inputmode="numeric"></div>
+        <div><label for="kg">원두 1kg 가격 (원)</label><input id="kg" type="number" min="0" step="1000" value="25000" inputmode="numeric"></div>
+        <div><label for="rent">머신 렌탈 월 (원)</label><input id="rent" type="number" min="0" step="5000" value="70000" inputmode="numeric"></div>
+        <div><label for="cap">캡슐 1잔 (원)</label><input id="cap" type="number" min="0" step="50" value="700" inputmode="numeric"></div>
+        <div><label for="cafe">카페 아메리카노 1잔 (원)</label><input id="cafe" type="number" min="0" step="100" value="2000" inputmode="numeric"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="result" aria-labelledby="out-h" aria-live="polite">
+    <h2 id="out-h">월 예상 비용</h2>
+    <div id="opts"></div>
+    <div class="insight">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></span>
+      <span id="saveText"></span>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="tbl-h">
+    <h2 id="tbl-h">인원별 사무실 커피 월 비용 (현재 단가 기준)</h2>
+    <table>
+      <thead><tr><th>사무실 인원</th><th>원두+렌탈</th><th>캡슐</th><th>카페</th></tr></thead>
+      <tbody id="tbl"></tbody>
+    </table>
+  </section>
+
+  <section class="band" aria-labelledby="lead-h">
+    <h2 id="lead-h">우리 사무실 원두 구독 견적 받기</h2>
+    <p>서울 지역 사무실 대상. 인원과 머신 보유 여부를 남겨주시면 원두·머신 렌탈·관리 포함 견적을 보내드려요.</p>
+    <form id="leadForm" novalidate>
+      <div class="grid">
+        <div><label for="fCompany">회사명</label><input id="fCompany" type="text" autocomplete="organization"></div>
+        <div><label for="fArea">지역</label>
+          <select id="fArea"><option>서울 강남·서초</option><option>서울 마포·영등포</option><option>서울 종로·중구</option><option>서울 성동·광진</option><option>서울 기타</option><option>서울 외 지역</option></select></div>
+        <div><label for="fPeople">인원</label><input id="fPeople" type="number" min="1" inputmode="numeric"></div>
+        <div><label for="fPhone">연락처</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="010-0000-0000"></div>
+      </div>
+      <label class="agree"><input type="checkbox" id="fAgree"> 견적 안내를 위한 개인정보(회사명·연락처) 수집·이용에 동의합니다. 수집 정보는 견적 안내 후 1년간 보관합니다.</label>
+      <button class="btn" type="submit">견적 요청하기</button>
+      <div class="formmsg" id="formMsg" role="status"></div>
+    </form>
+  </section>
+
+  <section class="sec" aria-labelledby="chk-h">
+    <h2 id="chk-h">사무실 커피머신 렌탈 계약 전 확인할 4가지</h2>
+    <ol class="check">
+      <li><b>원두 의무 구매가 있는지.</b> 월 렌탈료가 싸 보여도 업체 원두를 매달 일정량 사야 하는 조건이 붙으면 총비용이 올라갑니다. 원두 단가가 시중가와 얼마나 차이 나는지 같이 보세요.</li>
+      <li><b>위약금 계산 방식.</b> 중도 해지 시 남은 렌탈료의 일정 비율에 설치·철거비가 더해지는 경우가 많습니다. 약정 기간과 비율을 숫자로 확인하세요.</li>
+      <li><b>설치비·철거비·이전 설치.</b> 월 렌탈료와 별도로 청구되는지, 사무실 이전 시 옮겨주는지 확인하세요.</li>
+      <li><b>하루 추출량에 맞는 머신인지.</b> 위 계산기의 하루 잔수(월 잔수 ÷ 근무일)를 기준으로 물통·원두통 용량이 충분한 모델인지 보세요. 인원이 많으면 직수 연결 모델이 편합니다.</li>
+    </ol>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>사무실 커피 1잔에 원두는 몇 g 들어가나요?</dt>
+      <dd>아메리카노 기준 보통 10~15g입니다. 이 계산기는 넉넉하게 15g으로 잡았고, ‘단가 직접 바꾸기’에서 조정할 수 있어요.</dd></div>
+      <div><dt>머신을 사는 게 렌탈보다 싼가요?</dt>
+      <dd>가정·소형 사무실용 전자동 머신은 30만~50만 원대 제품도 있어, 렌탈료와 비교하면 1년 안쪽에 본전이 되는 경우가 많습니다. 대신 고장·청소·소모품 관리를 직접 해야 합니다.</dd></div>
+      <div><dt>캡슐 머신은 언제 유리한가요?</dt>
+      <dd>인원이 적고 하루 잔수가 많지 않을 때 관리가 편합니다. 다만 1잔 단가가 원두보다 높아서 인원이 늘수록 차이가 커집니다.</dd></div>
+    </dl>
+  </section>
+
+  <div class="src">
+    계산 기준 (2026년 11월 확인, 시장 평균값이며 업체·제품마다 다릅니다)
+    <ul>
+      <li>머신 렌탈 월 2만~8만 원대, 시중 대용량 원두 kg당 2만~3만 원, 캡슐 1잔 500~800원: <a href="https://gola4u.com/?p=9310">gola4u 사무실 커피머신 비교</a></li>
+      <li>렌탈 ‘정상’ 범위 월 7만~10만 원, 위약금 산정 예시: <a href="https://blog.hansungshowcase.kr/jadotkeopimeosinrental-2026nyeon-gagyeokgwa-moreumyeon-100-sonhae-boneun-4gaji-b">한성쇼케이스 블로그</a></li>
+      <li>저가 프랜차이즈 아메리카노 1,400~1,800원(2026년 7~8월 인상 기준): <a href="https://biz.sbs.co.kr/amp/article/20000325123">SBS Biz</a></li>
+    </ul>
+  </div>
+</Base>
+<script is:inline>
+const $=id=>document.getElementById(id);
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+let own=false;
+function setOwn(v){own=v;$('ownNo').setAttribute('aria-pressed',String(!v));$('ownYes').setAttribute('aria-pressed',String(v));calc()}
+$('ownNo').onclick=()=>setOwn(false);
+$('ownYes').onclick=()=>setOwn(true);
+const num=id=>Math.max(0,parseFloat($(id).value)||0);
+
+function costs(people){
+  const cups=people*num('cups')*num('days');
+  const kg=cups*num('gram')/1000;
+  const bean=kg*num('kg')+(own?0:num('rent'));
+  return {cups,kg,list:[
+    {name:'원두 + 머신 렌탈',note:own?'보유 머신 사용':'렌탈료 포함',v:bean},
+    {name:'캡슐 머신',note:'캡슐값만',v:cups*num('cap')},
+    {name:'카페 법인카드',note:'저가 프랜차이즈',v:cups*num('cafe')}
+  ]};
+}
+function calc(){
+  const p=Math.max(1,Math.round(num('people')));
+  const r=costs(p);
+  $('sCups').textContent=Math.round(r.cups).toLocaleString('ko-KR');
+  $('sKg').textContent=r.kg.toFixed(1);
+  const max=Math.max(...r.list.map(o=>o.v),1);
+  const min=Math.min(...r.list.map(o=>o.v));
+  let picked=false;
+  $('opts').innerHTML=r.list.map(o=>{
+    const pick=!picked&&r.cups>0&&o.v===min; if(pick)picked=true;
+    return `<div class="opt${pick?' pick':''}">
+      <div class="name">${o.name}${pick?'<span class="badge">최저</span>':''}<small>${o.note}</small></div>
+      <div class="won">${won(o.v)}<span class="per">1잔 ${r.cups>0?won(o.v/r.cups):'-'}</span></div>
+      <div class="bar"><i style="width:${(o.v/max*100).toFixed(1)}%"></i></div>
+    </div>`}).join('');
+  const bean=r.list[0].v, cafe=r.list[2].v;
+  $('saveText').innerHTML = r.cups>0
+    ? (cafe>bean ? `카페 대신 원두+머신으로 바꾸면<br><b>월 ${won(cafe-bean)}, 1년이면 ${won((cafe-bean)*12)} 아껴요.</b>`
+                 : `현재 조건에서는 카페 이용이 원두+머신보다 저렴해요.<br><b>인원이나 잔수를 다시 확인해보세요.</b>`)
+    : '인원과 잔수를 입력해주세요.';
+  const rows=[5,10,20,30,50];
+  $('tbl').innerHTML=rows.map(n=>{const c=costs(n).list;return `<tr${n===p?' class="cur"':''}><td>${n}명</td><td>${won(c[0].v)}</td><td>${won(c[1].v)}</td><td>${won(c[2].v)}</td></tr>`}).join('');
+  if(!$('fPeople').value) $('fPeople').placeholder=p+'명';
+}
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
+calc();
+
+$('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const m=$('formMsg'); m.style.display='block';
+  if(!$('fPhone').value.trim()){m.textContent='연락처를 입력해주세요.';return}
+  if(!$('fAgree').checked){m.textContent='개인정보 수집·이용에 동의해주세요.';return}
+  m.textContent='프로토타입이라 아직 실제로 전송되지 않아요. 사이트 오픈 시 견적 접수가 연결됩니다.';
+});
+</script>
