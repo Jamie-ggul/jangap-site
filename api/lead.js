@@ -3,6 +3,7 @@
 //   RESEND_API_KEY  required
 //   LEAD_TO         default contact@jangap.com
 //   LEAD_FROM       default "잔값 견적 <lead@jangap.com>" (domain must be verified in Resend)
+//   LEADS_SHEET_URL / LEADS_SHEET_TOKEN  optional: Google Apps Script web app that appends a row (scripts/leads-sheet.gs)
 const AREAS = ['서울 강남·서초', '서울 마포·영등포', '서울 종로·중구', '서울 성동·광진', '서울 기타', '서울 외 지역'];
 const MACHINES = ['있음', '없음', '잘 모르겠음'];
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
@@ -46,7 +47,7 @@ export default async function handler(req, res) {
 <p style="color:#888;font-size:12px">jangap.com 사무실 커피 비용 계산기에서 접수 · 개인정보 수집·이용 동의함 · ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}</p>`;
   const text = rows.map(([k, v]) => `${k}: ${v}`).join('\n');
 
-  const r = await fetch('https://api.resend.com/emails', {
+  const mail = fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -56,9 +57,22 @@ export default async function handler(req, res) {
       html, text,
       ...(d.email ? { reply_to: d.email } : {}),
     }),
-  });
-  if (!r.ok) {
-    console.error('resend', r.status, await r.text());
+  }).then(async r => { if (!r.ok) throw new Error('resend ' + r.status + ' ' + await r.text()); return true; });
+
+  const sheetUrl = process.env.LEADS_SHEET_URL, sheetToken = process.env.LEADS_SHEET_TOKEN;
+  const sheet = (sheetUrl && sheetToken)
+    ? fetch(sheetUrl, {
+        method: 'POST', redirect: 'follow', signal: AbortSignal.timeout(8000),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: sheetToken, ...d, people: d.people ? d.people + '명' : '' }),
+      }).then(async r => { const j = await r.json().catch(() => ({})); if (!j.ok) throw new Error('sheet ' + r.status + ' ' + (j.error || '')); return true; })
+    : Promise.resolve(null);
+
+  const [m, sh] = await Promise.allSettled([mail, sheet]);
+  if (m.status === 'rejected') console.error(m.reason?.message);
+  if (sh.status === 'rejected') console.error(sh.reason?.message);
+  // 메일이나 시트 중 하나라도 저장되면 접수 성공
+  if (m.status !== 'fulfilled' && !(sh.status === 'fulfilled' && sh.value)) {
     return res.status(502).json({ ok: false, error: 'send' });
   }
   return res.status(200).json({ ok: true });
