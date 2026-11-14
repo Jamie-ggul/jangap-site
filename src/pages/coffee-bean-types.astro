@@ -1,0 +1,195 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+const origins = [
+  { n: '에티오피아', t: '예가체프·시다모', f: '꽃·베리·레몬 같은 향, 밝은 산미', a: 5, b: 2, s: 3 },
+  { n: '케냐', t: 'AA', f: '자몽·와인 같은 진한 산미', a: 5, b: 3, s: 3 },
+  { n: '콜롬비아', t: '수프리모', f: '캐러멜·견과, 산미와 단맛의 균형', a: 3, b: 3, s: 4 },
+  { n: '과테말라', t: '안티구아', f: '초콜릿·스모키, 묵직한 단맛', a: 3, b: 4, s: 3 },
+  { n: '브라질', t: '산투스·세라도', f: '땅콩·초콜릿, 산미 적고 고소함', a: 2, b: 3, s: 3 },
+  { n: '인도네시아', t: '만델링', f: '흙·허브 향, 산미 낮고 묵직함', a: 1, b: 5, s: 2 },
+  { n: '베트남', t: '로부스타', f: '쓴맛 강하고 바디 무거움, 카페인 많음', a: 1, b: 5, s: 1 },
+];
+const bar = (v: number) => Array.from({ length: 5 }, (_, i) => i < v);
+---
+<Base ogImage="/img/og-bean-types.jpg" title="원두 종류: 커피 원두 종류별 맛 차이 (산지·로스팅·가공)" description="커피 원두 종류가 너무 많다면 산지, 로스팅, 가공 방식 세 가지만 보면 돼요. 에티오피아·콜롬비아·브라질 원두 맛 차이와 내 취향에 맞는 원두 종류를 골라드려요." path="/coffee-bean-types/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.">
+  <PageHero slot="hero" eyebrow="원두 가이드" title="원두 종류: 커피 원두 종류별 맛 차이" img="/img/band-beans.webp" imgM="/img/band-beans-m.webp" />
+
+  <p class="lead">커피 원두 종류는 수백 가지지만, 맛을 가르는 건 세 가지예요. 어디서 자랐는지(산지), 얼마나 볶았는지(로스팅), 어떻게 말렸는지(가공). 취향을 고르면 맞는 원두 종류부터 알려드려요.</p>
+
+  <section aria-label="취향 고르기">
+    <p class="sentence">
+      나는 <span class="seg" role="group" aria-label="맛 취향"><button type="button" data-t="acid" aria-pressed="false">산미 있는</button><button type="button" data-t="nutty" aria-pressed="true">고소한</button><button type="button" data-t="unsure" aria-pressed="false">잘 모르겠는</button></span>
+      커피를
+      <span class="seg" role="group" aria-label="마시는 방법"><button type="button" data-d="black" aria-pressed="true">블랙으로</button><button type="button" data-d="latte" aria-pressed="false">라떼로</button></span>
+      마셔요.
+    </p>
+  </section>
+
+  <section class="result" aria-labelledby="pick-h" aria-live="polite">
+    <h2 id="pick-h">추천 원두 종류</h2>
+    <div class="pick">
+      <p class="pick-main" id="pickMain"></p>
+      <dl class="pick-spec">
+        <div><dt>산지</dt><dd id="pkO"></dd></div>
+        <div><dt>로스팅</dt><dd id="pkR"></dd></div>
+        <div><dt>가공</dt><dd id="pkP"></dd></div>
+      </dl>
+    </div>
+    <div class="addon">
+      <h3>이 취향에 맞는 쿠팡 인기 원두</h3>
+      <p class="addon-lead">1kg 기준 1잔(15g) 값이 함께 보여요.</p>
+      <div id="pickItems"></div>
+    </div>
+    <p class="note"><a href="/coffee-bean-ranking/" id="moreLink">커피 원두 추천 랭킹에서 더 보기</a> · 가격은 2026년 11월 14일 쿠팡 판매가예요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="org-h">
+    <h2 id="org-h">산지별 원두 종류와 맛</h2>
+    <p>같은 원두라도 로스팅에 따라 달라지지만, 산지마다 대표적인 맛 경향이 있어요. 원두 이름에 붙은 나라와 지역 이름이 이거예요.</p>
+    <div class="origins">
+      {origins.map(o => (
+        <div class="org">
+          <p class="org-n">{o.n} <small>{o.t}</small></p>
+          <p class="org-f">{o.f}</p>
+          <dl class="bars">
+            <div><dt>산미</dt><dd>{bar(o.a).map(on => <i class={on ? 'on' : ''}></i>)}</dd></div>
+            <div><dt>바디</dt><dd>{bar(o.b).map(on => <i class={on ? 'on' : ''}></i>)}</dd></div>
+            <div><dt>단맛</dt><dd>{bar(o.s).map(on => <i class={on ? 'on' : ''}></i>)}</dd></div>
+          </dl>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="roast-h">
+    <h2 id="roast-h">로스팅 정도에 따른 원두 종류</h2>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th>로스팅</th><th>맛</th><th>잘 맞는 메뉴</th></tr></thead>
+        <tbody>
+          <tr><td><b>라이트</b><br><small>약배전</small></td><td>산미와 과일 향이 뚜렷하고 가벼워요</td><td>핸드드립 블랙</td></tr>
+          <tr><td><b>미디엄</b><br><small>중배전</small></td><td>산미·단맛·쓴맛이 균형 잡혀요</td><td>아메리카노, 드립</td></tr>
+          <tr><td><b>다크</b><br><small>강배전</small></td><td>쓴맛과 바디감이 강하고 고소해요</td><td>라떼, 에스프레소</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">원두 봉지에 "산미 없는", "고소한", "다크"라고 적혀 있으면 대개 미디엄 다크~다크 로스팅이에요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="proc-h">
+    <h2 id="proc-h">가공 방식: 워시드 vs 내추럴</h2>
+    <ul class="tips">
+      <li><b>워시드(Washed)</b> 열매 과육을 물로 씻어내고 말려요. 맛이 깔끔하고 산미가 선명해요.</li>
+      <li><b>내추럴(Natural)</b> 열매째 통으로 말려요. 과일 향과 단맛이 진하고 풍성해요.</li>
+      <li><b>허니(Honey)</b> 과육 일부를 남기고 말려요. 워시드와 내추럴의 중간이에요.</li>
+    </ul>
+  </section>
+
+  <section class="sec" aria-labelledby="sp-h">
+    <h2 id="sp-h">아라비카 vs 로부스타</h2>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th></th><th>아라비카</th><th>로부스타</th></tr></thead>
+        <tbody>
+          <tr><td>맛</td><td>향이 풍부하고 산미가 있어요</td><td>쓴맛이 강하고 묵직해요</td></tr>
+          <tr><td>카페인</td><td>상대적으로 적어요</td><td>아라비카의 약 2배</td></tr>
+          <tr><td>가격</td><td>비싼 편</td><td>싼 편</td></tr>
+          <tr><td>주로 쓰는 곳</td><td>스페셜티, 핸드드립</td><td>블렌드, 인스턴트, 라떼용</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">시중 원두 대부분은 아라비카예요. 로부스타는 1잔 값이 가장 싸서 <a href="/coffee-bean-ranking/">원두 1잔 단가 랭킹</a> 상위에 있어요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>블렌드와 싱글오리진은 뭐가 다른가요?</dt>
+      <dd>싱글오리진은 한 산지의 원두만 써서 그 지역 특징이 뚜렷해요. 블렌드는 여러 산지를 섞어 맛을 일정하게 맞춘 거라, 매일 마시는 원두로 무난해요. 카페 원두도 대부분 블렌드예요.</dd></div>
+      <div><dt>처음 원두를 산다면 어떤 종류가 좋나요?</dt>
+      <dd>취향을 모르겠다면 콜롬비아나 브라질이 들어간 미디엄 로스팅 블렌드가 가장 실패가 적어요. 마셔보고 산미가 더 있었으면 하면 에티오피아, 더 진했으면 하면 다크 로스팅으로 옮겨가세요.</dd></div>
+      <div><dt>G1, G2, AA 같은 건 뭔가요?</dt>
+      <dd>생두 등급이에요. 나라마다 기준이 달라서 에티오피아는 G1~G4처럼 숫자로, 케냐는 AA·AB처럼 콩 크기로 매겨요. 숫자가 작을수록(또는 AA일수록) 결점두가 적은 상위 등급이에요.</dd></div>
+      <div><dt>원두는 얼마나 사야 하나요?</dt>
+      <dd>개봉 후 3~4주 안에 마실 만큼이 좋아요. 하루 잔수로 계산하려면 <a href="/coffee-beans-1kg/">원두 1kg 몇 잔 계산기</a>를 써보세요.</dd></div>
+    </dl>
+  </section>
+
+  <RelatedTools current="/coffee-bean-types/" />
+
+  <div class="src">
+    기준 (2026년 11월 14일)
+    <ul>
+      <li>산지별 맛은 일반적인 경향이에요. 같은 산지라도 농장, 로스팅, 가공 방식에 따라 달라져요.</li>
+      <li>추천 상품과 가격: 쿠팡 검색 결과 랭킹 상위 상품의 판매가.</li>
+    </ul>
+  </div>
+
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
+</Base>
+
+<style is:global>
+.seg button{min-height:40px}
+.tscroll{overflow-x:auto}
+.tscroll td small{color:var(--body)}
+.sentence .seg{margin:4px 0}
+.pick{padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.pick-main{margin:0 0 14px;font-size:var(--s3);line-height:1.6}
+.pick-main b{color:var(--espresso)}
+.pick-spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0}
+.pick-spec div{padding:10px;background:var(--band);border-radius:8px}
+.pick-spec dt{font-size:var(--s1);color:var(--body)}
+.pick-spec dd{margin:2px 0 0;font-weight:700;font-size:14px;line-height:1.4}
+.origins{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.org{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.org-n{margin:0;font-weight:700;font-size:var(--s3)}
+.org-n small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
+.org-f{margin:4px 0 10px;font-size:14px;color:var(--body);line-height:1.5;min-height:3em}
+.bars{margin:0;display:grid;gap:4px}
+.bars div{display:grid;grid-template-columns:36px 1fr;align-items:center}
+.bars dt{font-size:12px;color:var(--body)}
+.bars dd{margin:0;display:flex;gap:3px}
+.bars i{flex:1;height:6px;border-radius:3px;background:var(--hair)}
+.bars i.on{background:var(--espresso)}
+.tips{list-style:none;padding:0;margin:0}
+.tips li{padding:14px 0;border-bottom:1px solid var(--hair);color:var(--body)}
+.tips li:first-child{border-top:1px solid var(--hair)}
+.tips li b{display:block;color:var(--ink);font-size:var(--s3);margin-bottom:2px}
+@media (max-width:480px){.origins{gap:8px}.org{padding:12px}.org-n{font-size:15px}.org-f{font-size:13px;min-height:4.5em}.bars div{grid-template-columns:30px 1fr}.bars dt{font-size:11px}}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+const P={
+ et:['티타임 에티오피아 프리미엄 블렌드','에티오피아 블렌드 · 1kg',21520,'iFkPe1KXAa'],
+ yg4:['블랙빈스 에티오피아 예가체프 G4','예가체프 · 1kg',27360,'iFkK1zqP9M'],
+ yg2:['헬리빈 에티오피아 예가체프 G2','예가체프 · 1kg',29620,'iFkOfvhArc'],
+ gg:['곰곰 콜롬비아 블렌드','콜롬비아 블렌드 · 1kg',29990,'iE0R9r9DnE'],
+ br:['딥스커피 브라질 몬테까르멜로','브라질 싱글오리진 · 1kg',27540,'iFkKuuAZnE'],
+ ac:['더써드로스터스 아몬드초콜릿','산미 없는 고소한 블렌드 · 1kg',28500,'iFkMnkeBH2'],
+ sd:['수달리커피 너티초코 블렌드','고소한 블렌드 · 1kg',29800,'iFkKcHwCwC'],
+ wb:['워너빈 카카오딥 블렌딩','진한 블렌드 · 1kg',15720,'iFkIVVP1CD'],
+ rb:['알커피 베트남 로부스타 G1','로부스타 · 1kg',11900,'iFkH1XOG6e'],
+};
+const R={
+ 'acid-black':{m:'과일 향과 밝은 산미를 좋아한다면 <b>에티오피아 예가체프</b>가 첫 번째예요. 핸드드립으로 내리면 향이 가장 잘 살아요.',o:'에티오피아, 케냐',r:'라이트~미디엄',p:'워시드(깔끔) 또는 내추럴(과일 향)',i:['et','yg4','yg2'],h:'acid'},
+ 'acid-latte':{m:'산미가 강한 원두는 우유와 섞이면 시큼하게 느껴질 수 있어요. 라떼라면 산미와 단맛이 균형 잡힌 <b>콜롬비아 미디엄 로스팅</b>이 좋아요.',o:'콜롬비아, 에티오피아 블렌드',r:'미디엄',p:'워시드',i:['gg','et','sd'],h:''},
+ 'nutty-black':{m:'고소하고 산미 없는 커피라면 <b>브라질·콜롬비아 블렌드</b>예요. 원두 봉지에 "고소한", "초콜릿", "산미 없는"이 적힌 걸 고르세요.',o:'브라질, 콜롬비아, 과테말라',r:'미디엄 다크',p:'내추럴',i:['ac','sd','br'],h:'nutty'},
+ 'nutty-latte':{m:'라떼는 우유에 묻히지 않는 <b>다크 로스팅 블렌드</b>가 좋아요. 로부스타가 섞이면 더 진하고 1잔 값도 싸져요.',o:'브라질, 인도네시아, 베트남(로부스타)',r:'다크',p:'내추럴',i:['wb','ac','rb'],h:'nutty'},
+ 'unsure-black':{m:'취향을 아직 모르겠다면 <b>콜롬비아·브라질 미디엄 로스팅 블렌드</b>가 가장 실패가 적어요. 마셔보고 산미가 아쉬우면 에티오피아로, 더 진했으면 하면 다크로 옮겨가세요.',o:'콜롬비아, 브라질',r:'미디엄',p:'워시드',i:['gg','sd','ac'],h:''},
+ 'unsure-latte':{m:'라떼로 처음 원두를 산다면 <b>고소한 미디엄 다크 블렌드</b>가 무난해요. 우유와 섞여도 커피 맛이 살아 있어요.',o:'브라질, 콜롬비아',r:'미디엄 다크~다크',p:'내추럴',i:['ac','wb','gg'],h:'nutty'},
+};
+let t='nutty',d='black';
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{t=b.dataset.t;document.querySelectorAll('[data-t]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();});
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{d=b.dataset.d;document.querySelectorAll('[data-d]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();});
+function draw(){
+  const r=R[t+'-'+d];
+  $('pickMain').innerHTML=r.m; $('pkO').textContent=r.o; $('pkR').textContent=r.r; $('pkP').textContent=r.p;
+  $('pickItems').innerHTML=r.i.map(k=>{const p=P[k];return `<a class="add-item" href="https://link.coupang.com/a/${p[3]}" target="_blank" rel="sponsored nofollow noopener"><span class="nm">${p[0]}<small>${p[1]} ${won(p[2])}</small></span><span class="pr">1잔 ${won(p[2]/1000*15)}</span></a>`}).join('');
+  $('moreLink').href='/coffee-bean-ranking/'+(r.h?'#'+r.h:'');
+}
+draw();
+</script>

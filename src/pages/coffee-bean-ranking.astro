@@ -55,6 +55,7 @@ const won = (n: number) => Math.round(n).toLocaleString('ko-KR') + '원';
   <section class="sec" aria-labelledby="how-h">
     <h2 id="how-h">원두 고르는 법</h2>
     <ul class="tips">
+      <li><b>맛 취향부터 정하고 싶다면.</b> 산지·로스팅별 맛 차이는 <a href="/coffee-bean-types/">원두 종류 가이드</a>에서 취향을 고르면 바로 정리돼요.</li>
       <li><b>1잔 단가는 로부스타가 가장 싸요.</b> 베트남 G1 같은 로부스타는 쓴맛과 바디감이 강하고 카페인이 많은 편이라, 라떼나 진한 아이스 커피에 잘 맞아요.</li>
       <li><b>산미가 싫다면 브라질·콜롬비아 블렌드.</b> 상품 설명에 "고소한", "초콜릿", "산미 없는"이 붙은 원두가 무난해요.</li>
       <li><b>과일 향과 산미를 원하면 에티오피아.</b> 예가체프, 시다모 같은 이름이 붙은 원두예요. 핸드드립으로 내리면 향이 잘 살아요.</li>
@@ -114,6 +115,7 @@ const won = (n: number) => Math.round(n).toLocaleString('ko-KR') + '원';
 <script is:inline>
 const $=id=>document.getElementById(id);
 let key='all';
+{const h=location.hash.slice(1);if(['nutty','acid','decaf'].includes(h)){key=h;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.k===h)));}}
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
 document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{key=b.dataset.k;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));calc();});
 $('gram').addEventListener('input',calc);
