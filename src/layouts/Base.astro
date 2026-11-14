@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 interface Props { title: string; description: string; path: string; home?: boolean; wide?: boolean; disclose?: string; ogImage?: string }
 const { title, description, path, home = false, wide = false, disclose, ogImage = '/img/og-home.jpg' } = Astro.props;
 const site = 'https://jangap.com';
@@ -59,5 +60,6 @@ const fullTitle = home ? title : `${title} | 잔값`;
       <p>© 2026 잔값</p>
     </div>
   </footer>
+  <Analytics />
 </body>
 </html>
