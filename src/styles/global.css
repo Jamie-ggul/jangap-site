@@ -138,3 +138,14 @@ ol.check li b{color:var(--ink)}
 /* 상단 제휴 고지 한 줄 */
 .top-disc{max-width:680px;margin:0 auto;padding:6px 20px 8px;font-size:11.5px;line-height:1.5;color:var(--muted)}
 .is-wide .top-disc{max-width:1120px;padding-left:24px;padding-right:24px}
+
+/* 함께 쓰면 좋은 상품 모듈 */
+.addon{margin-top:24px;padding:20px;background:var(--band);border-radius:12px}
+.addon[hidden]{display:none}
+.addon h3{margin:0 0 4px;font-size:var(--s3)}
+.addon-lead{margin:0 0 6px;font-size:14px;color:var(--body)}
+.add-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-top:8px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
+.add-item:hover{border-color:var(--espresso)}
+.add-item .nm{font-weight:700}
+.add-item .nm small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
+.add-item .pr{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
