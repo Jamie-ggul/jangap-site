@@ -150,6 +150,8 @@ ol.check li b{color:var(--ink)}
 .add-item .nm{font-weight:700}
 .add-item .nm small{display:block;font-weight:400;font-size:var(--s1);color:var(--body)}
 .add-item .pr{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.add-item.has-img{grid-template-columns:56px 1fr auto;padding:10px 14px 10px 10px}
+.add-item .th{width:56px;height:56px;border-radius:6px;background:#fff;border:1px solid var(--line);object-fit:contain;display:block}
 
 .band textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;resize:vertical}
 .band textarea:focus{outline:none;border-color:var(--espresso);box-shadow:0 0 0 1px var(--espresso)}
