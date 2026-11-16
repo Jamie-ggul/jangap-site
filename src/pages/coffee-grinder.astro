@@ -43,7 +43,7 @@ const MAX = 1.5;
     </div>
     <div class="addon">
       <h3>이 조건에 맞는 쿠팡 그라인더</h3>
-      <p class="addon-lead">"준비 중"인 상품은 링크를 곧 연결할게요.</p>
+      <p class="addon-lead">조건을 바꾸면 상품도 바뀌어요.</p>
       <div id="pickItems"></div>
     </div>
     <p class="note" id="pickNote"></p>
@@ -95,7 +95,7 @@ const MAX = 1.5;
       <div><dt>커피 그라인더 추천, 처음이면 수동이랑 전동 중 뭐가 좋아요?</dt>
       <dd>하루 1~2잔을 핸드드립으로 마신다면 수동 커피 그라인더로 충분해요. 가족이 같이 마시거나 아침마다 여러 잔을 내린다면 전동 커피 그라인더가 편해요.</dd></div>
       <div><dt>핸드그라인더로 에스프레소도 갈 수 있나요?</dt>
-      <dd>"에스프레소 가능"이라고 표시된 제품이면 돼요. 에스프레소는 아주 곱고 일정한 굵기가 필요해서, 굵기를 잘게 나눠 조절할 수 있어야 해요.</dd></div>
+      <dd>"에스프레소 가능"이라고 표시된 제품이면 돼요. 에스프레소는 아주 곱고 일정한 굵기가 필요해서, 굵기를 잘게 나눠 조절할 수 있어야 해요. 타임모어처럼 같은 모델에 "ESP" 버전이 따로 있으면 그쪽을 고르세요.</dd></div>
       <div><dt>분쇄도가 맞는지 어떻게 알아요?</dt>
       <dd>맛으로 보면 돼요. 쓰고 텁텁하면 너무 곱게 간 거라 한 단계 굵게, 밍밍하거나 시큼하면 너무 굵은 거라 한 단계 곱게 바꿔보세요.</dd></div>
       <div><dt>원두분쇄기 없이 분쇄 원두를 사도 되나요?</dt>
@@ -108,11 +108,11 @@ const MAX = 1.5;
   <RelatedTools current="/coffee-grinder/" />
 
   <div class="src">
-    기준 (2026년 11월 15일 확인)
+    기준 (2026년 11월 17일 확인)
     <ul>
       <li>추출 방식별 분쇄도 범위: <a href="https://www.kitchenaid.com/countertop-appliances/pinch-of-help/coffee-grind-size" rel="noopener" target="_blank">KitchenAid, Coffee Grind Size</a>, <a href="https://honestcoffeeguide.com/coffee-grind-size-chart/" rel="noopener" target="_blank">Honest Coffee Guide, Coffee Grind Size Chart</a>. 콜드브루 상한 1.4mm는 Honest Coffee Guide 기준이에요.</li>
       <li>칼날식·버 방식 차이: KitchenAid 같은 페이지 설명을 옮겼어요.</li>
-      <li>상품과 가격: 쿠팡 검색 결과 랭킹 상위 상품, 2026년 11월 14일 판매가.</li>
+      <li>상품과 가격: 쿠팡 검색 결과 랭킹 상위 상품, 2026년 11월 17일 판매가.</li>
     </ul>
   </div>
 
@@ -166,15 +166,17 @@ const G=[
 ];
 // [이름, 설명, 가격, 링크코드(없으면 준비 중)]
 const P={
- casa:['까사카페 전동 커피 그라인더','전동 · 입문용',27170,'iFaqPBb93Y'],
- wiz:['위즈웰 전동 그라인더 WSG-9100','전동 · 입문용',0,''],
- pro:['프로살림 무선 전동 그라인더','전동 · 무선',0,''],
- zuco:['주코 코니컬 버 전동 그라인더','전동 · 코니컬 버',0,''],
- feima:['페이마 601N','전동 · 에스프레소용',0,''],
- malk:['말코닉 X54','전동 · 에스프레소용',0,''],
- kc7:['칼딘 핸드그라인더 KC-7','수동',0,''],
- c3s:['타임모어 C3S','수동',0,''],
- c5:['타임모어 C5','수동',0,''],
+ casa:['까사카페 분리형 전동 그라인더','전동 · 칼날식',27170,'iFaqPBb93Y'],
+ wiz:['위즈웰 전동 그라인더 WSG-9100','전동 · 칼날식',28900,'iJk9ZEF1oa'],
+ pro:['프로살림 무선 전동 그라인더 PCG1','전동 · 무선 · 세라믹 버',29800,'iJlb3VnCDI'],
+ zuco:['주코 코니컬 버 그라인더 ZG-XB001B','전동 · 코니컬 버',115000,'iJlclAEgkS'],
+ feima:['페이마 601N','전동 · 에스프레소용',259000,'iJldxYnTUq'],
+ malk:['말코닉 X54','전동 · 에스프레소용',700000,'iJldPyNOuG'],
+ kc7:['칼딘 핸드밀 KC-7','수동 · 세라믹 버',36000,'iJlp9ABn3s'],
+ c3s:['타임모어 C3S','수동 · 핸드드립용',51080,'iJlpRYskM0'],
+ c5:['타임모어 C5 프로','수동 · 핸드드립용',68690,'iJlpAg45VA'],
+ c5esp:['타임모어 C5 ESP','수동 · 에스프레소 미세 조절',61010,'iJlpiBh2AK'],
+ c3esp:['타임모어 C3 ESP','수동 · 에스프레소 미세 조절',83800,'iJlo01pMmO'],
 };
 let m=2,h='hand',b='low';
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
@@ -188,9 +190,9 @@ function pick(){
       note:'에스프레소용 전동 그라인더는 대부분 15만 원 이상이에요.'};
   }
   if(esp){
-    return {t:'에스프레소 대응 수동',i:['c5','c3s'],
+    return {t:'에스프레소 대응 수동',i:['c5esp','c3esp'],
       msg:'손으로 에스프레소를 갈려면 <b>"에스프레소 가능" 표시가 있는 수동 그라인더</b>를 고르세요. 굵기를 잘게 나눠 조절할 수 있어야 해요.',
-      note:'수동 그라인더 상세 페이지에서 에스프레소 지원 여부와 조절 단계를 확인하세요.'};
+      note:'같은 모델이라도 에스프레소용은 "ESP" 버전이에요. 일반 버전은 한 칸 차이가 커서 에스프레소 맞추기 어려워요.'};
   }
   if(h==='hand'){
     const i=b==='low'?['kc7','c3s']:['c3s','c5'];
@@ -199,9 +201,9 @@ function pick(){
       note:'수동은 대부분 버 방식이라 입자가 고르게 나와요.'};
   }
   if(b==='low'){
-    return {t:'입문용 전동',i:['casa','wiz','pro'],
-      msg:'<b>5만 원 이하 전동 그라인더</b>는 칼날식이 많아요. '+G[m][4]+'용으로 쓰기엔 괜찮지만, 상세 페이지에서 굵기 조절이 되는지 꼭 확인하세요.',
-      note:'칼날식은 입자가 들쭉날쭉해지기 쉬워요. 맛이 아쉬우면 버 방식으로 넘어가세요.'};
+    return {t:'입문용 전동',i:['pro','casa','wiz'],
+      msg:'<b>5만 원 이하 전동 그라인더</b>는 칼날식이 많아요. 칼날식은 누르는 시간으로 굵기를 맞춰서 '+G[m][4]+'용으로 쓰기엔 괜찮아요. 굵기를 단계로 고르고 싶으면 버 방식을 고르세요.',
+      note:'프로살림은 세라믹 버, 까사카페·위즈웰은 칼날식이에요. 칼날식은 입자가 들쭉날쭉해지기 쉬워요.'};
   }
   return {t:'전동 코니컬 버',i:b==='high'?['zuco','feima']:['zuco'],
     msg:'버튼으로 편하게 갈면서 맛도 챙기려면 <b>전동 코니컬 버 그라인더</b>가 좋아요. '+G[m][4]+'에 맞는 굵기로 매번 같게 갈려요.',
@@ -214,7 +216,7 @@ function draw(){
   $('pickItems').innerHTML=r.i.map(k=>{const p=P[k];return p[3]
     ?`<a class="add-item" href="https://link.coupang.com/a/${p[3]}" target="_blank" rel="sponsored nofollow noopener"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">${won(p[2])}</span></a>`
     :`<div class="add-item soon"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">준비 중</span></div>`}).join('');
-  $('pickNote').textContent=r.note+(r.i.includes('casa')?' 가격은 2026년 11월 14일 쿠팡 판매가예요.':'');
+  $('pickNote').textContent=r.note+' 가격은 2026년 11월 17일 쿠팡 판매가예요.';
 }
 draw();
 </script>
