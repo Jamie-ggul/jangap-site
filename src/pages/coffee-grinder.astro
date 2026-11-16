@@ -1,0 +1,222 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+const grind = [
+  { m: '에스프레소', d: '아주 고움', t: '가루에 가깝지만 살짝 알갱이가 느껴져요', lo: 0.18, hi: 0.38 },
+  { m: '모카포트', d: '고움', t: '에스프레소보다 한 단계 굵게', lo: 0.36, hi: 0.66 },
+  { m: '핸드드립', d: '중간~약간 고움', t: '입자가 고르게 보이는 정도', lo: 0.40, hi: 0.93 },
+  { m: '커피메이커', d: '중간', t: '드립 머신 바스켓용', lo: 0.30, hi: 0.90 },
+  { m: '프렌치프레스', d: '굵음', t: '알갱이가 눈에 또렷하게 보여요', lo: 0.69, hi: 1.30 },
+  { m: '콜드브루', d: '굵음~아주 굵음', t: '오래 우리니까 가장 굵게', lo: 0.80, hi: 1.40 },
+];
+const MAX = 1.5;
+---
+<Base ogImage="/img/og-coffee-grinder.jpg" title="커피 그라인더 추천: 전동 vs 수동, 추출별 원두 분쇄도" description="커피 그라인더 고르기 전에 볼 건 추출 방식과 분쇄도예요. 전동 커피 그라인더와 수동 핸드그라인더 차이, 에스프레소·핸드드립·콜드브루별 원두 분쇄도를 한눈에 정리했어요." path="/coffee-grinder/" disclose="이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.">
+  <PageHero slot="hero" eyebrow="도구 가이드" title="커피 그라인더 추천: 전동 vs 수동" img="/img/band-machine.webp" imgM="/img/band-machine-m.webp" />
+
+  <p class="lead">커피 그라인더 추천을 찾는다면 먼저 정할 게 두 가지예요. 어떻게 내려 마시는지(추출 방식), 그리고 손으로 갈지 버튼으로 갈지. 추출 방식마다 맞는 원두 분쇄도가 달라서, 그라인더가 그 굵기를 낼 수 있는지가 가장 중요해요.</p>
+
+  <section aria-label="조건 고르기">
+    <p class="sentence">
+      커피는 <span class="seg seg-m" role="group" aria-label="추출 방식"><button type="button" data-m="0" aria-pressed="false">에스프레소</button><button type="button" data-m="1" aria-pressed="false">모카포트</button><button type="button" data-m="2" aria-pressed="true">핸드드립</button><button type="button" data-m="3" aria-pressed="false">커피메이커</button><button type="button" data-m="4" aria-pressed="false">프렌치프레스</button><button type="button" data-m="5" aria-pressed="false">콜드브루</button></span>
+    </p>
+    <p class="sentence">원두는
+      <span class="seg" role="group" aria-label="가는 방식"><button type="button" data-h="hand" aria-pressed="true">손으로 갈래요</button><button type="button" data-h="auto" aria-pressed="false">버튼으로 갈래요</button></span>
+    </p>
+    <p class="sentence">예산은
+      <span class="seg" role="group" aria-label="예산"><button type="button" data-b="low" aria-pressed="true"><span class="nw">5만 원</span> 이하</button><button type="button" data-b="mid" aria-pressed="false"><span class="nw">5만~15만 원</span></button><button type="button" data-b="high" aria-pressed="false"><span class="nw">15만 원</span> 이상</button></span>
+    </p>
+  </section>
+
+  <section class="result" aria-labelledby="pick-h" aria-live="polite">
+    <h2 id="pick-h">이런 커피 그라인더가 맞아요</h2>
+    <div class="pick">
+      <p class="pick-main" id="pickMain"></p>
+      <dl class="pick-spec">
+        <div><dt>분쇄도</dt><dd id="pkG"></dd></div>
+        <div><dt>입자 크기</dt><dd id="pkS"></dd></div>
+        <div><dt>그라인더</dt><dd id="pkT"></dd></div>
+      </dl>
+      <div class="gbar" aria-hidden="true"><i id="gFill"></i></div>
+      <p class="gbar-lbl" aria-hidden="true"><span>고움</span><span>굵음</span></p>
+    </div>
+    <div class="addon">
+      <h3>이 조건에 맞는 쿠팡 그라인더</h3>
+      <p class="addon-lead">조건을 바꾸면 상품도 바뀌어요.</p>
+      <div id="pickItems"></div>
+    </div>
+    <p class="note" id="pickNote"></p>
+  </section>
+
+  <section class="sec" aria-labelledby="size-h">
+    <h2 id="size-h">추출 방식별 원두 분쇄도 한눈에</h2>
+    <p>입자가 고울수록 빨리, 진하게 우러나요. 그래서 물이 짧게 지나가는 에스프레소는 곱게, 오래 담가두는 프렌치프레스·콜드브루는 굵게 갈아요.</p>
+    <div class="gtable">
+      {grind.map(g => (
+        <div class="grow">
+          <p class="gm">{g.m}<small>{g.d}</small></p>
+          <div class="gtrack"><i style={`left:${(g.lo / MAX * 100).toFixed(1)}%;width:${((g.hi - g.lo) / MAX * 100).toFixed(1)}%`}></i></div>
+          <p class="gv"><span class="nw">{g.lo.toFixed(2)}~{g.hi.toFixed(2)}</span> <span class="nw">mm</span></p>
+        </div>
+      ))}
+    </div>
+    <p class="note">범위는 대부분의 입자가 들어오는 정도예요. 같은 방식이라도 원두와 레시피에 따라 조금씩 옮겨가요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="hm-h">
+    <h2 id="hm-h">전동 커피 그라인더 vs 수동 커피 그라인더</h2>
+    <div class="tscroll">
+      <table>
+        <thead><tr><th></th><th>수동(핸드그라인더)</th><th>전동</th></tr></thead>
+        <tbody>
+          <tr><td>가는 법</td><td>손잡이를 직접 돌려요</td><td>버튼 한 번이면 끝</td></tr>
+          <tr><td>소음</td><td>조용한 편</td><td>모터 소리가 나요</td></tr>
+          <tr><td>전원·휴대</td><td>전원 없이 어디서나, 캠핑에도</td><td>콘센트나 충전 필요</td></tr>
+          <tr><td>여러 잔</td><td>잔수가 많으면 힘들어요</td><td>한 번에 많이 갈기 편해요</td></tr>
+          <tr><td>잘 맞는 사람</td><td>하루 1~2잔, 핸드드립 위주</td><td>하루 여러 잔, 가족이 같이 마심</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="bb-h">
+    <h2 id="bb-h">원두 분쇄기 방식: 칼날 vs 버(Burr)</h2>
+    <ul class="tips">
+      <li><b>칼날식</b> 믹서처럼 날이 돌면서 원두를 잘라요. 값이 싸지만, 입자 크기가 들쭉날쭉해지기 쉬워요.</li>
+      <li><b>버(Burr) 방식</b> 톱니 두 개 사이에서 원두를 으깨듯 갈아요. 입자가 고르게 나와서 맛이 안정적이고, 굵기 조절이 쉬워요. 수동 핸드그라인더는 대부분 이 방식이에요.</li>
+    </ul>
+    <p class="note">전동 원두그라인더를 고를 때는 상세 페이지에서 "칼날"인지 "버(코니컬·플랫)"인지 꼭 확인하세요. 에스프레소라면 버 방식이면서 미세 조절이 되는 제품이어야 해요.</p>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-h">
+    <h2 id="faq-h">자주 묻는 질문</h2>
+    <dl class="faq">
+      <div><dt>커피 그라인더 추천, 처음이면 수동이랑 전동 중 뭐가 좋아요?</dt>
+      <dd>하루 1~2잔을 핸드드립으로 마신다면 수동 커피 그라인더로 충분해요. 가족이 같이 마시거나 아침마다 여러 잔을 내린다면 전동 커피 그라인더가 편해요.</dd></div>
+      <div><dt>핸드그라인더로 에스프레소도 갈 수 있나요?</dt>
+      <dd>"에스프레소 가능"이라고 표시된 제품이면 돼요. 에스프레소는 아주 곱고 일정한 굵기가 필요해서, 굵기를 잘게 나눠 조절할 수 있어야 해요. 타임모어처럼 같은 모델에 "ESP" 버전이 따로 있으면 그쪽을 고르세요.</dd></div>
+      <div><dt>분쇄도가 맞는지 어떻게 알아요?</dt>
+      <dd>맛으로 보면 돼요. 쓰고 텁텁하면 너무 곱게 간 거라 한 단계 굵게, 밍밍하거나 시큼하면 너무 굵은 거라 한 단계 곱게 바꿔보세요.</dd></div>
+      <div><dt>원두분쇄기 없이 분쇄 원두를 사도 되나요?</dt>
+      <dd>돼요. 다만 갈아둔 원두는 향이 빨리 날아가서 소량씩 사는 게 좋아요. 홀빈이 궁금하면 <a href="/coffee-bean-ranking/">커피 원두 추천 랭킹</a>에서 1잔 값으로 비교해보세요.</dd></div>
+      <div><dt>커피분쇄기 청소는 어떻게 해요?</dt>
+      <dd>원두 가루와 기름이 남으면 맛이 텁텁해져요. 대부분 마른 솔로 털어내는 방식이고, 물세척이 되는지는 제품마다 달라서 설명서를 먼저 확인하세요.</dd></div>
+    </dl>
+  </section>
+
+  <RelatedTools current="/coffee-grinder/" />
+
+  <div class="src">
+    기준 (2026년 11월 17일 확인)
+    <ul>
+      <li>추출 방식별 분쇄도 범위: <a href="https://www.kitchenaid.com/countertop-appliances/pinch-of-help/coffee-grind-size" rel="noopener" target="_blank">KitchenAid, Coffee Grind Size</a>, <a href="https://honestcoffeeguide.com/coffee-grind-size-chart/" rel="noopener" target="_blank">Honest Coffee Guide, Coffee Grind Size Chart</a>. 콜드브루 상한 1.4mm는 Honest Coffee Guide 기준이에요.</li>
+      <li>칼날식·버 방식 차이: KitchenAid 같은 페이지 설명을 옮겼어요.</li>
+      <li>상품과 가격: 쿠팡 검색 결과 랭킹 상위 상품, 2026년 11월 17일 판매가.</li>
+    </ul>
+  </div>
+
+  <p slot="credit">상단 사진: Zarak Khan / <a href="https://unsplash.com/" rel="noopener">Unsplash</a></p>
+</Base>
+
+<style is:global>
+.seg button{min-height:40px}
+.sentence .seg{margin:4px 0}
+.seg-m{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:420px;vertical-align:middle}
+.seg-m button{border-top:1px solid var(--line)}
+.seg-m button:nth-child(-n+3){border-top:0}
+.seg-m button:nth-child(3n+1){border-left:0}
+.seg-m button{padding:.2em .4em;white-space:nowrap}
+.tscroll{overflow-x:auto}
+.pick{padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.pick-main{margin:0 0 14px;font-size:var(--s3);line-height:1.6}
+.pick-main b{color:var(--espresso)}
+.pick-spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0}
+.pick-spec div{padding:10px;background:var(--band);border-radius:8px}
+.pick-spec dt{font-size:var(--s1);color:var(--body)}
+.pick-spec dd{margin:2px 0 0;font-weight:700;font-size:14px;line-height:1.4}
+.gbar,.gtrack{position:relative;height:10px;border-radius:5px;background:var(--hair)}
+.gbar{margin-top:16px}
+.gbar i,.gtrack i{position:absolute;top:0;bottom:0;border-radius:5px;background:var(--espresso)}
+.gbar-lbl{display:flex;justify-content:space-between;margin:4px 0 0;font-size:12px;color:var(--body)}
+.gtable{display:grid;gap:10px;margin-top:16px}
+.grow{display:grid;grid-template-columns:110px 1fr 104px;gap:12px;align-items:center}
+.gm{margin:0;font-weight:700;font-size:15px;line-height:1.3}
+.gm small{display:block;font-weight:400;font-size:12px;color:var(--body)}
+.gv{margin:0;font-size:13px;color:var(--body);text-align:right;font-variant-numeric:tabular-nums}
+.add-item.soon{cursor:default;border-style:dashed}
+.add-item.soon:hover{border-color:var(--line)}
+.add-item.soon .pr{color:var(--muted);font-weight:400;font-size:14px}
+.tips{list-style:none;padding:0;margin:0}
+.tips li{padding:14px 0;border-bottom:1px solid var(--hair);color:var(--body)}
+.tips li:first-child{border-top:1px solid var(--hair)}
+.tips li b{display:block;color:var(--ink);font-size:var(--s3);margin-bottom:2px}
+@media (max-width:480px){.grow{grid-template-columns:84px 1fr;row-gap:2px}.gv{grid-column:2;text-align:left;font-size:12px}.pick{padding:16px}.pick-spec dd{font-size:13px}}
+</style>
+
+<script is:inline>
+const $=id=>document.getElementById(id);
+const G=[
+ ['아주 고움','0.18~0.38mm',0.18,0.38,'에스프레소'],
+ ['고움','0.36~0.66mm',0.36,0.66,'모카포트'],
+ ['중간~약간 고움','0.40~0.93mm',0.40,0.93,'핸드드립'],
+ ['중간','0.30~0.90mm',0.30,0.90,'커피메이커'],
+ ['굵음','0.69~1.30mm',0.69,1.30,'프렌치프레스'],
+ ['굵음~아주 굵음','0.80~1.40mm',0.80,1.40,'콜드브루'],
+];
+// [이름, 설명, 가격, 링크코드(없으면 준비 중)]
+const P={
+ casa:['까사카페 분리형 전동 그라인더','전동 · 칼날식',27170,'iFaqPBb93Y'],
+ wiz:['위즈웰 전동 그라인더 WSG-9100','전동 · 칼날식',28900,'iJk9ZEF1oa'],
+ pro:['프로살림 무선 전동 그라인더 PCG1','전동 · 무선 · 세라믹 버',29800,'iJlb3VnCDI'],
+ zuco:['주코 코니컬 버 그라인더 ZG-XB001B','전동 · 코니컬 버',115000,'iJlclAEgkS'],
+ feima:['페이마 601N','전동 · 에스프레소용',259000,'iJldxYnTUq'],
+ malk:['말코닉 X54','전동 · 에스프레소용',700000,'iJldPyNOuG'],
+ kc7:['칼딘 핸드밀 KC-7','수동 · 세라믹 버',36000,'iJlp9ABn3s'],
+ c3s:['타임모어 C3S','수동 · 핸드드립용',51080,'iJlpRYskM0'],
+ c5:['타임모어 C5 프로','수동 · 핸드드립용',68690,'iJlpAg45VA'],
+ c5esp:['타임모어 C5 ESP','수동 · 에스프레소 미세 조절',61010,'iJlpiBh2AK'],
+ c3esp:['타임모어 C3 ESP','수동 · 에스프레소 미세 조절',83800,'iJlo01pMmO'],
+};
+let m=2,h='hand',b='low';
+const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
+function bind(attr,set){document.querySelectorAll('['+attr+']').forEach(x=>x.onclick=()=>{set(x.getAttribute(attr));document.querySelectorAll('['+attr+']').forEach(y=>y.setAttribute('aria-pressed',String(y===x)));draw();});}
+bind('data-m',v=>m=+v);bind('data-h',v=>h=v);bind('data-b',v=>b=v);
+function pick(){
+  const esp=m===0;
+  if(esp&&h==='auto'){
+    return {t:'에스프레소용 전동 버',i:b==='high'?['feima','malk']:['feima'],
+      msg:'에스프레소는 아주 곱고 일정한 굵기가 필요해서 <b>에스프레소용 전동 버 그라인더</b>가 맞아요.'+(b==='high'?'':' 이 용도는 보통 15만 원 이상이라, 예산을 조금 올리거나 수동을 함께 보세요.'),
+      note:'에스프레소용 전동 그라인더는 대부분 15만 원 이상이에요.'};
+  }
+  if(esp){
+    return {t:'에스프레소 대응 수동',i:['c5esp','c3esp'],
+      msg:'손으로 에스프레소를 갈려면 <b>"에스프레소 가능" 표시가 있는 수동 그라인더</b>를 고르세요. 굵기를 잘게 나눠 조절할 수 있어야 해요.',
+      note:'같은 모델이라도 에스프레소용은 "ESP" 버전이에요. 일반 버전은 한 칸 차이가 커서 에스프레소 맞추기 어려워요.'};
+  }
+  if(h==='hand'){
+    const i=b==='low'?['kc7','c3s']:['c3s','c5'];
+    return {t:'수동 버 그라인더',i,
+      msg:G[m][4]+'는 <b>수동 핸드그라인더</b>로 충분해요. 조용하고 전원이 필요 없어서 하루 1~2잔이면 가장 편해요.'+(m>=4?' 굵게 갈수록 손이 덜 가요.':''),
+      note:'수동은 대부분 버 방식이라 입자가 고르게 나와요.'};
+  }
+  if(b==='low'){
+    return {t:'입문용 전동',i:['pro','casa','wiz'],
+      msg:'<b>5만 원 이하 전동 그라인더</b>는 칼날식이 많아요. 칼날식은 누르는 시간으로 굵기를 맞춰서 '+G[m][4]+'용으로 쓰기엔 괜찮아요. 굵기를 단계로 고르고 싶으면 버 방식을 고르세요.',
+      note:'프로살림은 세라믹 버, 까사카페·위즈웰은 칼날식이에요. 칼날식은 입자가 들쭉날쭉해지기 쉬워요.'};
+  }
+  return {t:'전동 코니컬 버',i:b==='high'?['zuco','feima']:['zuco'],
+    msg:'버튼으로 편하게 갈면서 맛도 챙기려면 <b>전동 코니컬 버 그라인더</b>가 좋아요. '+G[m][4]+'에 맞는 굵기로 매번 같게 갈려요.',
+    note:'하루 여러 잔, 가족이 같이 마신다면 이 구간이 가장 만족도가 높아요.'};
+}
+function draw(){
+  const g=G[m],r=pick();
+  $('pickMain').innerHTML=r.msg; $('pkG').textContent=g[0]; $('pkS').innerHTML='<span class="nw">'+g[1].replace('mm','')+'</span><span class="nw">mm</span>'; $('pkT').textContent=r.t;
+  $('gFill').style.left=(g[2]/1.5*100)+'%'; $('gFill').style.width=((g[3]-g[2])/1.5*100)+'%';
+  $('pickItems').innerHTML=r.i.map(k=>{const p=P[k];return p[3]
+    ?`<a class="add-item" href="https://link.coupang.com/a/${p[3]}" target="_blank" rel="sponsored nofollow noopener"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">${won(p[2])}</span></a>`
+    :`<div class="add-item soon"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">준비 중</span></div>`}).join('');
+  $('pickNote').textContent=r.note+' 가격은 2026년 11월 17일 쿠팡 판매가예요.';
+}
+draw();
+</script>
