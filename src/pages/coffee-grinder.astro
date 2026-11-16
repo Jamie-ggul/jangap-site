@@ -164,19 +164,20 @@ const G=[
  ['굵음','0.69~1.30mm',0.69,1.30,'프렌치프레스'],
  ['굵음~아주 굵음','0.80~1.40mm',0.80,1.40,'콜드브루'],
 ];
-// [이름, 설명, 가격, 링크코드(없으면 준비 중)]
+// [이름, 설명, 가격, 링크코드(없으면 준비 중), 쿠팡 썸네일 경로(vendor_inventory/ 뒤)]
+const IMG='https://thumbnail1.coupangcdn.com/thumbnails/remote/212x212ex/image/vendor_inventory/';
 const P={
- casa:['까사카페 분리형 전동 그라인더','전동 · 칼날식',27170,'iFaqPBb93Y'],
- wiz:['위즈웰 전동 그라인더 WSG-9100','전동 · 칼날식',28900,'iJk9ZEF1oa'],
- pro:['프로살림 무선 전동 그라인더 PCG1','전동 · 무선 · 세라믹 버',29800,'iJlb3VnCDI'],
- zuco:['주코 코니컬 버 그라인더 ZG-XB001B','전동 · 코니컬 버',115000,'iJlclAEgkS'],
- feima:['페이마 601N','전동 · 에스프레소용',259000,'iJldxYnTUq'],
- malk:['말코닉 X54','전동 · 에스프레소용',700000,'iJldPyNOuG'],
- kc7:['칼딘 핸드밀 KC-7','수동 · 세라믹 버',36000,'iJlp9ABn3s'],
- c3s:['타임모어 C3S','수동 · 핸드드립용',51080,'iJlpRYskM0'],
- c5:['타임모어 C5 프로','수동 · 핸드드립용',68690,'iJlpAg45VA'],
- c5esp:['타임모어 C5 ESP','수동 · 에스프레소 미세 조절',61010,'iJlpiBh2AK'],
- c3esp:['타임모어 C3 ESP','수동 · 에스프레소 미세 조절',83800,'iJlo01pMmO'],
+ casa:['까사카페 분리형 전동 그라인더','전동 · 칼날식',27170,'iFaqPBb93Y','0c1d/c5b37a0f416776abeadbda35961d386c044e396b8abc1bc10915aabc628a.png'],
+ wiz:['위즈웰 전동 그라인더 WSG-9100','전동 · 칼날식',28900,'iJk9ZEF1oa','fde8/6a678938952a8da9c24082c570af3beb213dd99e3d477a733b8b37837079.jpg'],
+ pro:['프로살림 무선 전동 그라인더 PCG1','전동 · 무선 · 세라믹 버',29800,'iJlb3VnCDI','2be7/b3009c67e3c8f2d90d2cf6db7dda2edfec11412abc9d1b4667b8e335c57b.jpg'],
+ zuco:['주코 코니컬 버 그라인더 ZG-XB001B','전동 · 코니컬 버',115000,'iJlclAEgkS','bfd8/58e6a738b3b33ab4490e9c980a2bed4a73ca506c771a75a86a248ddad803.jpg'],
+ feima:['페이마 601N','전동 · 에스프레소용',259000,'iJldxYnTUq','30e4/ffe8ef1ea14795ce2d7482b2729db6b3a920a593c4016b620e391c274c30.png'],
+ malk:['말코닉 X54','전동 · 에스프레소용',700000,'iJldPyNOuG','a832/adaaf29bff10ff5f21eaedc96d948ccd6bd0287c39a532700f0d15ddb4b0.jpeg'],
+ kc7:['칼딘 핸드밀 KC-7','수동 · 세라믹 버',36000,'iJlp9ABn3s','5b43/e023b0a647e45672b6e5f5bf14bde5f1ba7cf2a49af0bfcbff3a3fbc54d1.jpg'],
+ c3s:['타임모어 C3S','수동 · 핸드드립용',51080,'iJlpRYskM0','be44/f41b0a13c2682fa4da25e62113c7f2c2015f05232539584d746c65e768d6.jpg'],
+ c5:['타임모어 C5 프로','수동 · 핸드드립용',68690,'iJlpAg45VA','a008/d521c0848f4c3e96e1602da06583034d3988420eb2fe6a87cdc9926d1489.jpeg'],
+ c5esp:['타임모어 C5 ESP','수동 · 에스프레소 미세 조절',61010,'iJlpiBh2AK','7fa1/fd288c0c2f3512f27a924aac7bb7745f772924c64ca8d084dda6ccf6c2f3.jpeg'],
+ c3esp:['타임모어 C3 ESP','수동 · 에스프레소 미세 조절',83800,'iJlo01pMmO','9233/4a7d7cc56aaa5dc00e547324bb1297ff376b68de771e803eb12bf7099b70.jpg'],
 };
 let m=2,h='hand',b='low';
 const won=n=>Math.round(n).toLocaleString('ko-KR')+'원';
@@ -214,7 +215,7 @@ function draw(){
   $('pickMain').innerHTML=r.msg; $('pkG').textContent=g[0]; $('pkS').innerHTML='<span class="nw">'+g[1].replace('mm','')+'</span><span class="nw">mm</span>'; $('pkT').textContent=r.t;
   $('gFill').style.left=(g[2]/1.5*100)+'%'; $('gFill').style.width=((g[3]-g[2])/1.5*100)+'%';
   $('pickItems').innerHTML=r.i.map(k=>{const p=P[k];return p[3]
-    ?`<a class="add-item" href="https://link.coupang.com/a/${p[3]}" target="_blank" rel="sponsored nofollow noopener"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">${won(p[2])}</span></a>`
+    ?`<a class="add-item${p[4]?' has-img':''}" href="https://link.coupang.com/a/${p[3]}" target="_blank" rel="sponsored nofollow noopener">${p[4]?`<img class="th" src="${IMG+p[4]}" alt="" width="56" height="56" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove('has-img');this.remove()">`:''}<span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">${won(p[2])}</span></a>`
     :`<div class="add-item soon"><span class="nm">${p[0]}<small>${p[1]}</small></span><span class="pr">준비 중</span></div>`}).join('');
   $('pickNote').textContent=r.note+' 가격은 2026년 11월 17일 쿠팡 판매가예요.';
 }
