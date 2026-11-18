@@ -5,6 +5,7 @@ const tools = [
   { href: '/coffee-beans-1kg/', title: '원두 1kg 몇 잔?', desc: '며칠 가는지, 250g·500g·1kg 중 뭐가 맞는지', icon: 'bean' },
   { href: '/coffee-bean-types/', title: '원두 종류별 맛 차이', desc: '취향으로 고르는 산지·로스팅', icon: 'bean' },
   { href: '/coffee-bean-ranking/', title: '커피 원두 추천 랭킹', desc: '인기 원두를 1잔 값으로 줄 세우기', icon: 'bean' },
+  { href: '/coffee-types/', title: '커피 종류 한눈에', desc: '라떼·카푸치노·플랫화이트 우유 비율 비교', icon: 'cup' },
   { href: '/coffee-grinder/', title: '커피 그라인더 추천', desc: '전동 vs 수동, 추출 방식별 원두 분쇄도', icon: 'grinder' },
   { href: '/home-coffee-machine/', title: '가정용 커피머신 고르기', desc: '캡슐·전자동·반자동 3년 총비용 비교', icon: 'machine' },
   { href: '/nespresso-capsule/', title: '네스프레소 캡슐 고르기', desc: '정품 vs 호환 한 달 비용, 취향별 캡슐', icon: 'capsule' },
@@ -20,6 +21,7 @@ const tools = [
         {t.icon === 'bean' && <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="6.5" ry="9" transform="rotate(30 12 12)"/><path d="M9 5.5c3 3 3 9 6 13"/></svg>}
         {t.icon === 'machine' && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v5H5zM7 8v9M17 8v13H5v-4"/><path d="M9.5 13h4v3a2 2 0 0 1-2 2 2 2 0 0 1-2-2z"/></svg>}
         {t.icon === 'grinder' && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l-1 6H9zM6 9h12v12H6zM12 3V1.5M12 1.5h5"/><circle cx="12" cy="15" r="2.5"/></svg>}
+        {t.icon === 'cup' && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v2M12 3v2"/></svg>}
         {t.icon === 'capsule' && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M6 8l2 11h8l2-11M9 8V5h6v3"/></svg>}
         {t.icon === 'bolt' && <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>}
         {t.icon === 'office' && <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M10 21v-3h4v3"/></svg>}
