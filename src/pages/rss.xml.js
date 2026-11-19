@@ -1,6 +1,7 @@
 // RSS feed for Naver/Google discovery. Add new pages to the top of `items`.
 const site = 'https://jangap.com';
 const items = [
+  { path: '/coffee-types/', title: '커피 종류: 메뉴별 에스프레소·우유 비율 한눈에 (라떼·카푸치노·플랫화이트)', desc: '아메리카노, 카페라떼, 카푸치노, 플랫화이트, 마키아또 등 커피 종류 12가지의 에스프레소·우유·거품 비율 비교와 취향별 메뉴 추천.', date: '2026-11-18T12:00:00+09:00' },
   { path: '/coffee-grinder/', title: '커피 그라인더 추천: 전동 vs 수동, 추출별 원두 분쇄도', desc: '전동 커피 그라인더와 수동 핸드그라인더 차이, 에스프레소·핸드드립·콜드브루별 원두 분쇄도 정리.', date: '2026-11-15T12:00:00+09:00' },
   { path: '/coffee-bean-types/', title: '원두 종류: 커피 원두 종류별 맛 차이 (산지·로스팅·가공)', desc: '산지, 로스팅, 가공 방식으로 보는 커피 원두 종류별 맛 차이와 취향별 원두 추천.', date: '2026-11-14T15:30:00+09:00' },
   { path: '/coffee-bean-ranking/', title: '커피 원두 추천: 맛별 1잔 단가 랭킹', desc: '쿠팡 인기 원두를 1잔(15g) 단가 순으로 비교한 커피 원두 추천 랭킹.', date: '2026-11-14T15:00:00+09:00' },
