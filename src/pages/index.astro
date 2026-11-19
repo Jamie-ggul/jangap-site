@@ -83,9 +83,13 @@ import Base from '../layouts/Base.astro';
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>
           <b>카페인 함량표</b><span>프랜차이즈 메뉴별 카페인, 하루 권고량 대비</span><i>계산하기</i>
         </a>
+        <a class="tile" href="/coffee-types/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v2M12 3v2"/></svg>
+          <b>커피 종류 한눈에</b><span>라떼·카푸치노·플랫화이트 우유 비율 비교</span><i>골라보기</i>
+        </a>
         <a class="tile ask-tile" href="/about/#contact">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-          <b>필요한 계산기가 있나요?</b><span>알려주시면 다음 도구로 만들어요</span><i>제안하기</i>
+          <span class="ask-txt"><b>필요한 계산기가 있나요?</b><span>알려주시면 다음 도구로 만들어요</span></span><i>제안하기</i>
         </a>
       </div>
     </div>
@@ -172,7 +176,10 @@ import Base from '../layouts/Base.astro';
   .tile span{color:var(--body);line-height:1.6}
   .tile i{margin-top:auto;font-style:normal;font-size:13px;font-weight:700;color:var(--espresso)}
   .tile.soon i{font-weight:400;color:var(--body)}
-  .ask-tile{background:transparent;border-style:dashed;border-color:var(--bar)}
+  .ask-tile{background:transparent;border-style:dashed;border-color:var(--bar);grid-column:1/-1;min-height:0;flex-direction:row;align-items:center;gap:16px}
+  .ask-tile svg{margin-bottom:0;flex:none}
+  .ask-txt{display:flex;flex-direction:column;gap:4px;flex:1}
+  .ask-tile i{margin-top:0;flex:none}
   .ask-tile svg{stroke:var(--body)}
 
   .data-sec .in{max-width:760px;margin:0 auto}
@@ -211,6 +218,9 @@ import Base from '../layouts/Base.astro';
     .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .tile{padding:18px;min-height:148px}
     .tile span{font-size:13px;line-height:1.5}
+    .ask-tile{grid-column:auto;flex-direction:column;align-items:stretch;gap:10px;min-height:148px}
+    .ask-tile svg{margin-bottom:4px}
+    .ask-tile i{margin-top:auto}
     .why{grid-template-columns:1fr;gap:24px}
   }
 </style>
